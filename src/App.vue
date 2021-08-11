@@ -2,16 +2,19 @@
   <div id="app">
     <sidebar :full=full />
     <router-view class="router"/>
+    <language-controller :full=full />
   </div>
 </template>
 
 <script>
 import Sidebar from './components/sidebar.vue'
+import LanguageController from './components/languageController.vue'
 
 export default {
   name: 'App',
   components: {
-    Sidebar
+    Sidebar,
+    LanguageController
   },
   data(){
     return{
@@ -21,8 +24,6 @@ export default {
   created(){
     var router = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];
     this.full = router.length > 0 ? false : true;
-    var userLang = navigator.language || navigator.userLanguage; 
-    alert ("The language is: " + userLang);
   }
 }
 </script>
@@ -38,9 +39,12 @@ body{
   background-color: #000000;
 }
 #app {
+  position: relative;
   user-select: none;
   height: 100vh;
   width: 100vw;
+  --colorMain1: white;
+  --neonPink: #EE6EFF;/*#FF6EC7*/
   --bgcolor1: black;
   --bgcolor2: #1B1B1B;
   --subtitleColor: #B7E7F7;
@@ -58,6 +62,7 @@ body{
     background-color: var(--bgcolor1);
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 #app::before{
   top: 0;
