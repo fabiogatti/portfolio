@@ -1,7 +1,7 @@
 <template>
     <div class="main-side">
-        <div class="sidebar" :class="[ fullScreen ? 'full-sidebar' : 'normal-sidebar' ]">
-            <div class="top-sidebar" :class="[ fullScreen ? 'scale-top' : '' ]">
+        <div class="sidebar" :class="[ full ? '' : 'normal-sidebar' ]">
+            <div class="top-sidebar anim-end" :class="[ fullScreen ? 'scale-top' : '' ]">
                 <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
                     <img class='profile-pic' src="../assets/img/profile.png" alt="">
                     <p>{{ $t('sidebar.profilePicText') }}</p>
@@ -12,13 +12,13 @@
                 </div>
             </div>
 
-            <div class="welcome-msg" v-show="fullScreen">
+            <div class="welcome-msg anim-end" v-show="fullScreen">
                 <p>{{ $t('sidebar.welcomeMsg1') }}</p>
                 <p>{{ $t('sidebar.welcomeMsg2') }}</p>
             </div>
             
             <div class="bottom-sidebar" :class="[ fullScreen ? 'bottom-full' : 'bottom-normal' ]">
-                <div class="item" v-for="item in sidebarMenu" :key="item.id">
+                <div class="item anim-end" v-for="item in sidebarMenu" :key="item.id">
                     <sidebarTitle :item="item" :active="active" @clicked="handleLinkClicked(item.id)"></sidebarTitle>
                 </div>
             </div>
@@ -34,6 +34,7 @@ import sidebarTitle from "./sidebarTitle.vue";
 
 export default {
     name:"sidebar",
+    props:['full'],
     components: {
         sidebarTitle
     },
@@ -51,44 +52,115 @@ export default {
     },
     methods:{
         handleLinkClicked(id){
-            if(this.fullScreen)
-                this.fullScreen = false;
+            if(this.fullScreen){
+                this.$anime
+                    .timeline()
+                    .add({
+                        targets: '.top-sidebar',
+                        translateY: -50,
+                        opacity: 0,
+                        duration: 600,
+                        easing: 'easeOutExpo',
+                    })
+                    .add({
+                        targets: '.welcome-msg',
+                        translateY: -50,
+                        opacity: 0,
+                        duration: 600,
+                        easing: 'easeOutExpo',
+                    })
+                    .add({
+                        targets: '.item',
+                        translateY: -50,
+                        opacity: 0,
+                        duration: 600,
+                        easing: 'easeOutExpo',
+                    })
+                    .add({
+                        targets: '.sidebar',
+                        width: '20vw',
+                        duration: 300,
+                        easing: 'easeOutExpo',
+                        delay: 0
+                    })
+                    .add({
+                        targets: '.anim-end',
+                        translateY: 0,
+                        translateX: -30,
+                        opacity: 0,
+                        duration: 300,
+                        easing: 'easeInExpo',
+                        delay: 300
+                    })
+                    .add({
+                        targets: '.anim-end',
+                        translateX: 0,
+                        opacity: 1,
+                        duration: 800,
+                        easing: 'easeInExpo',
+                        delay:500
+                    });
+                    setTimeout(() => {
+                        this.fullScreen = false;
+                    }, 2100);
+                    //animation.finished.then(()=>{ console.log('finished') });
+            }
             this.active = id;
         }
     },
     created(){
-        /*setTimeout(() => {
-            this.fullScreen = false;
-        }, 5000);*/
+        console.log(this.full)
+        if(this.full){
+            this.fullScreen = this.full;
+        }
+        else if(this.full == false){
+            this.fullScreen = this.full;
+        }
+    },
+    mounted(){
+        setTimeout(() => {
+            this.$anime
+            .timeline()
+            .add({
+                targets: '.sidebar',
+                translateY: -25,
+                duration: 100,
+                easing: 'easeOutExpo',
+            })
+            .add({
+                targets: '.sidebar',
+                translateY: 0,
+                opacity: 1,
+                duration: 600,
+                easing: 'easeOutExpo',
+            });
+        }, 100);
     }
 }
 </script>
 
 <style>
 @font-face {
-  font-family: 'Neon Glow';
-  src: url(https://assets.codepen.io/230569/NeonGlow-8VLz.ttf);
+    font-family: 'Neon Glow';
+    src: url(https://assets.codepen.io/230569/NeonGlow-8VLz.ttf);
 }
 .fade-enter-active, .fade-leave-active {
-  transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  transform: translateX(-20px);
-  opacity: 0
+    transform: translateX(-20px);
+    opacity: 0;
 }
 .main-side{
     display: flex;
     flex-direction: row;
-}
-.full-sidebar{
-    width: 100vw;
-}
-.normal-sidebar{
-    width: 20vw;
+    background-color: var(--bgcolor2);
 }
 .sidebar{
+    width: 100vw;
     position: relative;
     height: 100vh;
+    opacity: 0;
     background-color: var(--bgcolor2);
     display: flex;
     flex-direction: column;
@@ -96,6 +168,9 @@ export default {
     justify-content: start;
     z-index: 20;
     transition: width 1s ease-in-out;
+}
+.normal-sidebar{
+    width: 20vw;
 }
 p{
     font-family: 'Roboto Condensed', sans-serif;
@@ -155,7 +230,6 @@ p{
     color: var(--color);
     margin-top: 0.5em;
     font-weight: 100;
-    user-select: none;
     /*animation-name:opacityAnim, nameAnim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
@@ -166,9 +240,8 @@ p{
 .position{
     font-style: italic;
     font-size: 2.5vh;
-    color: var(--color);
+    color: var(--subtitleColor);
     margin-top: 0.25em;
-    user-select: none;
     /*font-weight: 400;
     animation: colorAnim 5s infinite;
     animation-delay: 0.3s;*/
@@ -176,17 +249,18 @@ p{
 .welcome-msg{
     display: flex;
     flex-direction: column;
-    color: rgb(197, 197, 197);
+    color: rgb(172, 172, 172);
     animation: all 0.3s ease-in-out;
     margin-bottom: 10vh;
 }
 .welcome-msg p{
-    animation: all 0.3s ease-in-out;
-    font-size: 2vh;
+    transition: all 0.3s ease-in-out;
+    font-size: 2.5vh;
     text-align: center;
 }
 .welcome-msg p:first-child{
     font-size: 4.5vh;
+    color: var(--subtitleColor);
 }
 .sidebar-div{
     margin-top: 2em;

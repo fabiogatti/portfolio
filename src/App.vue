@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <sidebar/>
+    <sidebar :full=full />
     <router-view class="router"/>
   </div>
 </template>
@@ -12,6 +12,17 @@ export default {
   name: 'App',
   components: {
     Sidebar
+  },
+  data(){
+    return{
+      full:true
+    }
+  },
+  created(){
+    var router = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];
+    this.full = router.length > 0 ? false : true;
+    var userLang = navigator.language || navigator.userLanguage; 
+    alert ("The language is: " + userLang);
   }
 }
 </script>
@@ -27,11 +38,12 @@ body{
   background-color: #000000;
 }
 #app {
+  user-select: none;
   height: 100vh;
   width: 100vw;
   --bgcolor1: black;
   --bgcolor2: #1B1B1B;
-  --color: #B7E7F7;
+  --subtitleColor: #B7E7F7;
   --color1: #18aeca;
   --color2: #2af598;
   /*background-image: linear-gradient(to bottom right, #3C1E1E 0%, #000000 100%);*/

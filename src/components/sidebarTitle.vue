@@ -44,7 +44,7 @@ export default {
   width: 100%;*/
 }
 .route:hover{
-  text-shadow: 0px 0px 1.25rem var(--color);
+  text-shadow: 0px 0px 1.25rem var(--subtitleColor);
 }
 .fade-enter-active, .fade-leave-active {
   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
