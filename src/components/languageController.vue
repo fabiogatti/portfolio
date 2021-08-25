@@ -124,11 +124,13 @@ button:focus {
   margin-bottom: 1em;
 }
 .lang-opt{
-  padding: 0.15em 0 0.15em 0;
-  transition: all .3s ease-in;
+  padding: 0.2em 0 0.2em 0;
+  transition: all .1s ease-in;
+  font-size: 1.1em;
 }
 .lang-opt:hover{
-  text-shadow: 0 0 15px var(--neonPink);
+  text-shadow: 0 0 10px var(--neonPink), 0 0 20px var(--neonPink);
+  font-size: 1.4em;
 }
 .main-lang-btn{
   position: relative;
@@ -136,6 +138,7 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all .15s ease-in-out;
 }
 .circle{
   width: 2rem;
@@ -161,7 +164,7 @@ button:focus {
   height: 3rem;
   margin: 20px;
   background: linear-gradient(45deg, transparent 60%, var(--neonPink));
-  animation: neon-loader 3s linear 0s infinite;
+  animation: neon-loader 3s linear 1s infinite;
   border-radius: 50%;
   z-index: 51;
 }
@@ -173,7 +176,8 @@ button:focus {
 .main-lang-btn:hover{
   background: var(--neonPink);
   border-radius: 50%;
-  transition: all .3s ease-in-out;
+  /*transition: all .3s ease-in-out;*/
+  transition: all .2s ease-in-out;
   box-shadow: 0 0 10px var(--neonPink),
               0 0 30px var(--neonPink),
               0 0 50px var(--neonPink);

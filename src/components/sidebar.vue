@@ -8,22 +8,22 @@
                 </div>
                 <div class="description-div">
                     <p class="name">Fabio Gatti</p>
-                    <p class="position" v-show="!fullScreen">{{ $t('sidebar.frontendEngineer') }}</p>
+                    <p class="position font-neon" v-show="!fullScreen">{{ $t('sidebar.frontendEngineer') }}</p>
                 </div>
             </div>
 
             <div class="welcome-msg anim-end" v-show="fullScreen">
-                <p>{{ $t('sidebar.welcomeMsg1') }}</p>
-                <p>{{ $t('sidebar.welcomeMsg2') }}</p>
+                <p class="font-neon">{{ $t('sidebar.welcomeMsg1') }}</p>
+                <p class="font-neon">{{ $t('sidebar.welcomeMsg2') }}</p>
             </div>
             
             <div class="bottom-sidebar" :class="[ fullScreen ? 'bottom-full' : 'bottom-normal' ]">
                 <div class="item anim-end" v-for="item in sidebarMenu" :key="item.id">
-                    <sidebarTitle :item="item" :active="active" @clicked="handleLinkClicked(item.id)"></sidebarTitle>
+                    <sidebarTitle :item="item" :active="active" :full="fullScreen" @clicked="handleLinkClicked(item.id)"></sidebarTitle>
                 </div>
             </div>
         </div>
-        <transition name="fade">
+        <transition name="fadeRight">
             <div class="line" v-if="!fullScreen"></div>
         </transition>
     </div>
@@ -34,7 +34,7 @@ import sidebarTitle from "./sidebarTitle.vue";
 
 export default {
     name:"sidebar",
-    props:['full'],
+    props:['full','activeElem'],
     components: {
         sidebarTitle
     },
@@ -88,9 +88,8 @@ export default {
                         translateY: 0,
                         translateX: -30,
                         opacity: 0,
-                        duration: 300,
+                        duration: 100,
                         easing: 'easeInExpo',
-                        delay: 300
                     })
                     .add({
                         targets: '.anim-end',
@@ -102,6 +101,7 @@ export default {
                     });
                     setTimeout(() => {
                         this.fullScreen = false;
+                        this.$emit('removefull');
                     }, 2100);
                     //animation.finished.then(()=>{ console.log('finished') });
             }
@@ -135,22 +135,14 @@ export default {
                 easing: 'easeOutExpo',
             });
         }, 100);
+        if(this.activeElem != 0){
+            this.active = this.activeElem;
+        }  
     }
 }
 </script>
 
 <style>
-@font-face {
-    font-family: 'Neon Glow';
-    src: url(https://assets.codepen.io/230569/NeonGlow-8VLz.ttf);
-}
-.fade-enter-active, .fade-leave-active {
-    transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    transform: translateX(-20px);
-    opacity: 0;
-}
 .main-side{
     display: flex;
     flex-direction: row;
@@ -173,7 +165,7 @@ export default {
     width: 20vw;
 }
 p{
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto-ondensed', sans-serif;
 }
 .top-sidebar{
     height: 50%;
@@ -224,7 +216,7 @@ p{
     font-size: 2.5vh;
 }
 .name{
-    font-family: 'Neon Glow';
+    font-family: 'Neon-glow';
     text-shadow: 0 0 1.75rem var(--color);
     font-size: 4.5vh;
     color: var(--color);
