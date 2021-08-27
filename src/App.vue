@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <sidebar :full=full :activeElem=activeElem @removefull="full=false" />
+    <sidebar :full="full" :activeElem="activeElem" @removefull="full=false" />
     <div class="absolute z-5 blob1">
       <transition name="fadeContentSlow">
         <svg width="600" height="450" v-show="!full">
@@ -9,9 +9,9 @@
       </transition>
     </div>
     <transition :name="transitionName">
-      <router-view v-if="!full" class="router"/>
+      <router-view v-if="!full" class="router" :full="firstSelected"/>
     </transition>
-    <language-controller :full=full />
+    <language-controller :full="full" />
   </div>
 </template>
 
@@ -30,7 +30,8 @@ export default {
     return{
       full:true,
       activeElem: 0,
-      transitionName: 'fadeContentSlow'
+      transitionName: 'fadeContentSlow',
+      firstSelected:false
     }
   },
   created(){
@@ -57,8 +58,10 @@ export default {
   },
   watch:{
     full(){
+      this.firstSelected = true;
       setTimeout(() => {
         this.transitionName = 'fadeContentNormal';
+        this.firstSelected = false;
       }, 1500);
     }
 } 
@@ -79,6 +82,10 @@ export default {
   src: local("Roboto-condensed"),  url(./fonts/Roboto-Condensed.ttf) format("truetype");
 }
 @font-face {
+  font-family: "Roboto-bold";
+  src: local("Roboto-Bold"),  url(./fonts/Roboto-Bold.ttf) format("truetype");
+}
+@font-face {
   font-family: "Scada";
   src: local("Scada"),  url(./fonts/Scada-Regular.ttf) format("truetype");
 }
@@ -94,6 +101,7 @@ export default {
   font-family: "Sansation_Regular";
   src: local("Sansation_Regular"),  url(./fonts/Sansation_Regular.ttf) format("truetype");
 }
+
 
 .font-neon{
   font-family: "Neon";
@@ -124,6 +132,7 @@ body{
   --textColor: #e5dbee;
   --color1: #18aeca;
   --color2: #2af598;
+  --grey1: #acacac;
 
   background-color: var(--bgcolor1);
   display: flex;
@@ -214,7 +223,7 @@ body{
 
 .routeContent{
   width: 100%;
-  padding: 2.5em 10em 2.5em 5em;
+  padding: 2.5vh 10vw 2.5vh 5vw;
 }
 
 @keyframes neon-title {

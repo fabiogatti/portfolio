@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import about from './views/about.vue'
 import contact from './views/about.vue'
 import skills from './views/skills.vue'
-import portfolio from './views/about.vue'
+import portfolio from './views/portfolio.vue'
 import notFound from './views/notFound.vue'
 
 Vue.use(Router)

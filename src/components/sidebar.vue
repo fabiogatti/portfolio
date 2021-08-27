@@ -241,7 +241,7 @@ p{
 .welcome-msg{
     display: flex;
     flex-direction: column;
-    color: rgb(172, 172, 172);
+    color: var(--grey1);
     animation: all 0.3s ease-in-out;
     margin-bottom: 10vh;
 }
