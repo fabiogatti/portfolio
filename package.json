@@ -15,6 +15,7 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "animejs": "^3.2.1",
     "core-js": "^3.6.5",
+    "node-sass": "^4.14.1",
     "vue": "^2.6.11",
     "vue-animejs": "^2.1.1",
     "vue-i18n": "^8.22.3",
@@ -31,6 +32,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "postcss": "^7.0.35",
+    "sass-loader": "^10.1.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
     "vue-cli-plugin-i18n": "~2.0.0",
     "vue-template-compiler": "^2.6.11"

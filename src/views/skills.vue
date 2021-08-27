@@ -1,7 +1,7 @@
 <template>
   <div class="routeContent">
     <div class="h-full w-screen flex flex-col justify-center skills">
-      <p class="contentTitle">Skills</p>
+      <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Skills</p>
       <div class="skills-content flex flex-col">
         <div class="flex flex-row items-center">
           <hoverTwoTexts class="skill-hover" :trans="2">
@@ -12,8 +12,8 @@
           <progressCircle :color="1" :percentage="55" :text="'HTML'" :fSize="1" :delay="delay" />
           <progressCircle :color="1" :percentage="70" :text="'CSS'" :fSize="1" :delay="delay" />
           <progressCircle :color="1" :percentage="65" :text="'VueJs'" :fSize="1" :delay="delay" />
-          <progressCircle :color="1" :percentage="65" :text="'Git'" :fSize="1" :delay="delay" />
-          <progressCircle :color="1" :percentage="65" :text="'Rest'" :fSize="1" :delay="delay" />
+          <progressCircle :color="1" :percentage="55" :text="'Git'" :fSize="1" :delay="delay" />
+          <progressCircle :color="1" :percentage="70" :text="'Rest'" :fSize="1" :delay="delay" />
         </div>
         <div class="flex flex-row mt-16 items-center">
           <hoverTwoTexts class="skill-hover" :trans="2">
@@ -49,7 +49,8 @@ export default {
   props:["full"],
   data(){
     return{
-      delay:1500
+      delay:1500,
+      color:1
     }
   },
   components:{

@@ -39,7 +39,7 @@ export default{
   user-select: none;
 }
 .active{
-  color: var(--colorMain1);
+  color: var(--colorWhite);
 }
 .icon{
   position: absolute;

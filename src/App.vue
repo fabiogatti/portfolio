@@ -122,9 +122,17 @@ body{
   user-select: none;
   height: 100vh;
   width: 100vw;
-  --colorMain1: white;
-  --neonPink: #EE6EFF;/*#FF6EC7*/
-  --neonPink2: #f399ff;
+  --colorWhite: white;
+  --neonPink1: #EE6EFF;/*#FF6EC7*/
+  --neonPink2:#E858BF;
+  --neonPink3: #FF6183;
+  --neonPink1Light: #f399ff;
+  --aquaMarine1: #18AECA;
+  --aquaMarine2: #10E0C7;
+  --aquaMarine3: #0FD686;
+  --amber1: #FFC00D;
+  --amber2:  #E8980C;
+  --amber3: #FF8300;
   --bgcolor1: black;
   --bgcolor2: #1B1B1B;
   --subtitleColor: #B7E7F7;
@@ -133,6 +141,7 @@ body{
   --color1: #18aeca;
   --color2: #2af598;
   --grey1: #acacac;
+  
 
   background-color: var(--bgcolor1);
   display: flex;
@@ -199,13 +208,25 @@ body{
 }
 
 .contentTitle{
-  font-family: "Neon-glow-light";
+  font-family: "Neon-glow";
   font-size: 5vh;
-  color: var(--neonPink);
-  text-shadow:0 0 10px var(--neonPink2),
-              0 0 30px var(--neonPink2),
-              0 0 50px var(--neonPink2);
-  /*animation: neon-title 3s linear 5s infinite alternate;*/
+  color: var(--neonPink1);
+  /*text-shadow:0 0 10px var(--neonPink1Light),
+              0 0 30px var(--neonPink1Light),
+              0 0 50px var(--neonPink1Light);
+  animation: neon-title 3s linear infinite alternate;*/
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contentTitle[colortitle="1"]{
+  animation: neon-title 3s linear infinite alternate;
+}
+.contentTitle[colortitle="2"]{
+  animation: neon-title2 3s linear infinite alternate;
+}
+.contentTitle[colortitle="3"]{
+  animation: neon-title3 3s linear infinite alternate;
 }
 
 .contentText{
@@ -217,7 +238,7 @@ body{
 .contentSubtitle{
   font-family: "Neon";
   font-size: 2.75vh;
-  color: var(--neonPink2);
+  color: var(--neonPink1Light);
 }
 
 
@@ -226,18 +247,66 @@ body{
   padding: 2.5vh 10vw 2.5vh 5vw;
 }
 
+.mt1{
+  margin-top: 1vh;
+}
+.mt2{
+  margin-top: 2vh;
+}
+.mt4{
+  margin-top: 4vh;
+}
+.mt5{
+  margin-top: 5vh;
+}
+.mt6{
+  margin-top: 6vh;
+}
+
 @keyframes neon-title {
   from {
-    color: var(--neonPink);
-    text-shadow:0 0 5px var(--neonPink2),
-                0 0 20px var(--neonPink2),
-                0 0 40px var(--neonPink2);
+    color: var(--neonPink1);
+    text-shadow:0 0 5px var(--neonPink1),
+                0 0 20px var(--neonPink1);
   }
   to {
     color: var(--neonPink2);
-    text-shadow:0 0 20px var(--neonPink),
-                0 0 40px var(--neonPink),
-                0 0 60px var(--neonPink);
+    text-shadow:
+      0 0 5px var(--neonPink2),
+      0 0 15px var(--neonPink2),
+      0 0 35px var(--neonPink2);
   }
 }
+
+@keyframes neon-title2 {
+  from {
+    color: var(--aquaMarine1);
+    text-shadow:0 0 5px var(--aquaMarine1),
+                0 0 20px var(--aquaMarine1);
+  }
+  to {
+    color: var(--aquaMarine2);
+    text-shadow:
+      0 0 5px var(--aquaMarine2),
+      0 0 15px var(--aquaMarine2),
+      0 0 35px var(--aquaMarine2);
+  }
+}
+
+@keyframes neon-title3 {
+  from {
+    color: var(--amber1);
+    text-shadow:0 0 5px var(--amber1),
+                0 0 20px var(--amber1);
+  }
+  to {
+    color: var(--amber2);
+    text-shadow:
+      0 0 5px var(--amber2),
+      0 0 15px var(--amber2),
+      0 0 35px var(--amber2);
+  }
+}
+
+
 </style>

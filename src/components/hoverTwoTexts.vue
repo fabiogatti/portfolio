@@ -40,21 +40,21 @@ export default {
 
 .hoverTwoTexts:hover .main[trans='1']{
   transform: translate(0,-0.1vh);
-  color: var(--colorMain1);
+  color: var(--colorWhite);
   filter: drop-shadow( 
     0 0 10px var(--grey1)
   );
 }
 .hoverTwoTexts:hover .main[trans='2']{
   transform: translate(0,-0.2vh);
-  color: var(--colorMain1);
+  color: var(--colorWhite);
   filter: drop-shadow( 
     0 0 10px var(--grey1)
   );
 }
 .hoverTwoTexts:hover .second{
   opacity: 1;
-  color: var(--colorMain1);
+  color: var(--colorWhite);
   text-shadow:  
     0 0 10px var(--grey1),
     0 0 30px var(--grey1),

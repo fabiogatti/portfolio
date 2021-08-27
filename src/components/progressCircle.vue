@@ -74,17 +74,17 @@ export default {
 .circle-gradient[color='0']{
   background-image: radial-gradient(transparent 55%,black 75%),
     conic-gradient( 
-			#EE6EFF,  #E858BF, #FF6183, #E858BF, #EE6EFF);
+			var(--neonPink1),  var(--neonPink2), var(--neonPink3), var(--neonPink2), var(--neonPink1));
 }
 .circle-gradient[color='1']{
   background-image: radial-gradient(transparent 55%,black 75%),
     conic-gradient( 
-			#18AECA,  #10E0C7, #0FD686, #10E0C7, #18AECA);
+			var(--aquaMarine1),  var(--aquaMarine2), var(--aquaMarine3), var(--aquaMarine2), var(--aquaMarine1));
 }
 .circle-gradient[color='2']{
   background-image: radial-gradient(transparent 55%,black 75%),
     conic-gradient( 
-			#FFC00D,  #E8980C, #FF8300, #E8980C, #FFC00D);
+			var(--amber1),  var(--amber2), var(--amber3), var(--amber2), var(--amber1));
 }
 .anim{
   height: 105%;
@@ -116,7 +116,7 @@ export default {
 }
 
 .circle-gradient[color='0']::before{
-  border: 3px solid #EE6EFF;
+  border: 3px solid var(--neonPink1);
 }
 .circle-gradient[color='1']::before{
   border: 3px solid #0FD686;

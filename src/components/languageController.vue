@@ -8,7 +8,7 @@
     <button class="main-lang-btn" @click="toggleButtons()">
       <div class="hue"></div>
       <div class="circle" :class="[ full ? 'bgColor2' : 'bgColor1' ]"></div>
-      <font-awesome-icon class="icon" icon="globe" id='globe' :class="[ active ? 'activeColor' : '' ]"/>
+      <font-awesome-icon class="iconLanguage" icon="globe" id='globe' :class="[ active ? 'activeColor' : '' ]"/>
     </button>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
         this.$anime
         .timeline()
           .add({
-              targets: '.icon',
+              targets: '.iconLanguage',
               rotate: 0,
               duration: 800,
               easing: 'easeOutExpo',
@@ -52,7 +52,7 @@ export default {
         this.$anime
           .timeline()
           .add({
-              targets: '.icon',
+              targets: '.iconLanguage',
               rotate: 180,
               duration: 800,
               easing: 'easeOutExpo',
@@ -110,7 +110,7 @@ button:focus {
   outline: none;
 }
 .lang{
-  color: var(--colorMain1);
+  color: var(--colorWhite);
   position: absolute;
   bottom: 4%;
   right: 2vw;
@@ -129,7 +129,7 @@ button:focus {
   font-size: 1.1em;
 }
 .lang-opt:hover{
-  text-shadow: 0 0 10px var(--neonPink), 0 0 20px var(--neonPink);
+  text-shadow: 0 0 10px var(--neonPink1), 0 0 20px var(--neonPink1);
   font-size: 1.4em;
 }
 .main-lang-btn{
@@ -154,7 +154,7 @@ button:focus {
   background-color: var(--bgcolor2)
 }
 .activeColor{
-  color: var(--neonPink);
+  color: var(--neonPink1);
 }
 .hue{
   width: 100%;
@@ -163,24 +163,24 @@ button:focus {
   width: 3rem;
   height: 3rem;
   margin: 20px;
-  background: linear-gradient(45deg, transparent 60%, var(--neonPink));
+  background: linear-gradient(45deg, transparent 60%, var(--neonPink1));
   animation: neon-loader 3s linear 1s infinite;
   border-radius: 50%;
   z-index: 51;
 }
-.icon{
+.iconLanguage{
   padding: 4px;
   font-size: 2em;
   z-index: 60;
 }
 .main-lang-btn:hover{
-  background: var(--neonPink);
+  background: var(--neonPink1);
   border-radius: 50%;
   /*transition: all .3s ease-in-out;*/
   transition: all .2s ease-in-out;
-  box-shadow: 0 0 10px var(--neonPink),
-              0 0 30px var(--neonPink),
-              0 0 50px var(--neonPink);
+  box-shadow: 0 0 10px var(--neonPink1),
+              0 0 30px var(--neonPink1),
+              0 0 50px var(--neonPink1);
 }
 .main-lang-btn:hover .hue{
   animation-play-state: paused;
