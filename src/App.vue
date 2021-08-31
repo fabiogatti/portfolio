@@ -216,6 +216,7 @@ body{
               0 0 50px var(--neonPink1Light);
   animation: neon-title 3s linear infinite alternate;*/
   cursor: pointer;
+  width: fit-content;
   transition: all 0.3s ease;
 }
 
@@ -261,6 +262,22 @@ body{
 }
 .mt6{
   margin-top: 6vh;
+}
+
+.ml1{
+  margin-left: 1vw;
+}
+.ml2{
+  margin-left: 2vw;
+}
+.ml4{
+  margin-left: 4vw;
+}
+.ml5{
+  margin-left: 5vw;
+}
+.ml6{
+  margin-left: 6vw;
 }
 
 @keyframes neon-title {

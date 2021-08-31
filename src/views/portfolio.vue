@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name:"portfolio",
+  name:"Portfolio",
   data(){
     return{
       color:1,

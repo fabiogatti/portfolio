@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-circle" :key="counter">
+  <div class="progress-circle" :key="counter" :class="active ? 'active' : ''" @mouseenter="$emit('hover',true)" @mouseleave="$emit('hover',false)"> 
     <div :color="color" class="circle-gradient w-full h-full flex justify-center items-center">
       <div class="loader" :style="loaderStyle"></div>
       <svg class="anim" ref="svgCircle">
@@ -19,7 +19,7 @@
 
 export default {
   name:"porgressCircle",
-  props:["color","percentage","text","delay","fSize"],
+  props:["color","percentage","text","delay","fSize",'active'],
   data(){
     return{
       animStyle:'',
@@ -102,7 +102,9 @@ export default {
   stroke: var(--bgcolor1);
   stroke-width: 12vh;
   stroke-dasharray: 500;
-  transition: stroke-dasharray 1.5s ease;
+  stroke-dashoffset: -1000; 
+  /*transition: stroke-dasharray 1.5s ease;*/
+  transition: stroke-dasharray 5.5s ease;
   scale: 1.1;
 }
 
@@ -147,7 +149,10 @@ export default {
   opacity: 0;
 }
 
-.progress-circle:hover .skill-name{
+/*.progress-circle:hover .skill-name{
+  transform: translate(0,-0.1vh);
+}*/
+.active .skill-name{
   transform: translate(0,-0.1vh);
 }
 
@@ -161,7 +166,10 @@ export default {
   font-size: 3vh;
 }
 
-.progress-circle:hover .skill-percent{
+/*.progress-circle:hover .skill-percent{
+  opacity: 1;
+}*/
+.active .skill-percent{
   opacity: 1;
 }
 
