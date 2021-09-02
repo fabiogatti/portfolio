@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <sidebar :full="full" :activeElem="activeElem" @removefull="full=false" />
-    <div class="absolute z-5 blob1">
+    <sidebar :full="full" :activeElem="activeElem" :windowSize='windowSize' @removefull="full=false" />
+    <!--<div class="absolute z-5 blob1">
       <transition name="fadeContentSlow">
         <svg width="600" height="450" v-show="!full">
           <path class="shapeShift" fill="#0e0e0e" d="M56.6,-37.7C71.3,-26.6,80,-3.2,76.1,18.9C72.3,41,56.1,61.9,37.1,67.2C18.2,72.5,-3.4,62.3,-21.8,51.2C-40.2,40.1,-55.4,28.1,-62.1,10.7C-68.8,-6.7,-67.2,-29.5,-55.4,-39.9C-43.7,-50.3,-21.8,-48.3,-0.5,-47.9C20.9,-47.6,41.8,-48.8,56.6,-37.7Z" transform="translate(100 100)" />
         </svg>
       </transition>
-    </div>
+    </div>-->
     <transition :name="transitionName">
       <router-view v-if="!full" class="router" :full="firstSelected"/>
     </transition>
-    <language-controller :full="full" />
+    <language-controller :full="full" :windowSize='windowSize'/>
   </div>
 </template>
 
 <script>
-import anime from 'animejs';
+//  import anime from 'animejs';
 import Sidebar from './components/sidebar.vue'
 import LanguageController from './components/languageController.vue'
 
@@ -31,8 +31,24 @@ export default {
       full:true,
       activeElem: 0,
       transitionName: 'fadeContentSlow',
-      firstSelected:false
+      firstSelected:false,
+      windowSize: 2
     }
+  },
+  methods:{
+    changeWindowSize(){
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      if(h >= w){
+        return 0;
+      }
+      else if(5*w < 8*h){
+        return 1;
+      }
+      else{
+        return 2;
+      }
+    },
   },
   created(){
     /*var router = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];*/
@@ -41,8 +57,15 @@ export default {
     //this.full = router.length > 0 ? false : true;
   },
   mounted(){
+    this.windowSize = this.changeWindowSize();
+    console.log(this.windowSize);
+    window.addEventListener('resize',()=>{
+      this.windowSize = this.changeWindowSize();
+      console.log(this.windowSize);
+      
+    });
     setTimeout(() => {
-      anime({
+      /*anime({
           targets: '.shapeShift',
           d: [
             { value: "M47.3,-39.5C52.3,-31.4,41.1,-12.3,33.5,2.3C25.9,16.9,21.8,26.9,13.1,33.4C4.4,40,-8.9,43.1,-24.6,39.8C-40.4,36.6,-58.6,27.1,-63.7,12.3C-68.8,-2.4,-60.9,-22.4,-48.1,-32.2C-35.3,-42,-17.7,-41.6,1.7,-43C21.1,-44.4,42.3,-47.5,47.3,-39.5Z"},
@@ -53,7 +76,7 @@ export default {
           duration: 15000,
           loop: true,
           direction: 'alternate',
-        });
+        });*/
     }, 200);
   },
   watch:{
@@ -68,7 +91,7 @@ export default {
 }
 </script>
 
-<style >
+<style lang="scss">
 @font-face {
   font-family: "Neon";
   src: local("Neon"),  url(./fonts/Neon.ttf) format("truetype");
@@ -118,9 +141,9 @@ body{
   background-color: #000000;
 }
 #app {
-  position: relative;
+  /*position: relative;*/
   user-select: none;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   --colorWhite: white;
   --neonPink1: #EE6EFF;/*#FF6EC7*/
@@ -142,7 +165,6 @@ body{
   --color2: #2af598;
   --grey1: #acacac;
   
-
   background-color: var(--bgcolor1);
   display: flex;
   flex-direction: row;
@@ -158,6 +180,7 @@ body{
 .router{
   min-width:80vw;
   z-index: 10;
+  transition: all 0.3s linear;
 }
 .fadeRight-enter-active, .fadeRight-leave-active {
   transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
@@ -325,5 +348,17 @@ body{
   }
 }
 
+@media only screen {
+  html,body,#app,.navbar,.main-side,#app .sidebar{
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+}
+
+@media (max-aspect-ratio: 8/5){
+  .router{
+    padding-bottom: 10vh;
+  }
+}
 
 </style>

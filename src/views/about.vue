@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-screen flex flex-col justify-center routeContent about">
+  <div class="h-full w-full flex flex-col justify-center routeContent about">
     <h1 class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">About me</h1>
     <div class="mt4">
       <h3 class="contentSubtitle">I'm a frontend developer, currently living in Cali - Colombia.</h3>

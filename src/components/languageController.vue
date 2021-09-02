@@ -1,22 +1,24 @@
 <template>
-  <div class="lang">
-    <div class="lang-list">
+  <div class="lang flex flex-col">
+    <div class="lang-list" :style="[ windowSize == 0 ? {order:2} : '']">
       <button class="lang-opt" @click="setLanguage('en')" :class="[ activeLang == 'en' ? 'activeColor' : '']">EN</button>
       <button class="lang-opt" @click="setLanguage('it')" :class="[ activeLang == 'it' ? 'activeColor' : '']">IT</button>
       <button class="lang-opt" @click="setLanguage('es')" :class="[ activeLang == 'es' ? 'activeColor' : '']">ES</button>
     </div>
-    <button class="main-lang-btn" @click="toggleButtons()">
+    <button class="main-lang-btn mt1" @click="toggleButtons()" :style="[ windowSize == 0 ? {order:1} : '']">
       <div class="hue"></div>
-      <div class="circle" :class="[ full ? 'bgColor2' : 'bgColor1' ]"></div>
+      <!--<div class="circle"></div>-->
       <font-awesome-icon class="iconLanguage" icon="globe" id='globe' :class="[ active ? 'activeColor' : '' ]"/>
     </button>
   </div>
 </template>
 
 <script>
+import anime from 'animejs';
+
 export default {
   name:'LanguageController',
-  props:['full'],
+  props:['full','windowSize'],
   data(){
     return{
       active:false,
@@ -29,51 +31,64 @@ export default {
       this.$i18n.locale = lang;
     },
     toggleButtons(){
+      var translateY1 = 0;
+      var translateY2 = 40;
+      if(this.windowSize == 0){
+        translateY1 = 10;
+        translateY2 = -40;
+      }
+
       if(this.active){
-        this.$anime
-          .timeline()
+        anime.timeline()
           .add({
               targets: '.lang-list',
-              translateY: 20,
+              translateY: translateY2,
               opacity: 0,
-              duration: 300,
-              easing: 'easeOutExpo',
+              duration: 350,
+              easing: 'linear',
+              complete: function() {
+                document.querySelector('.lang-list').style.display = 'none';
+              }
           });
-        this.$anime
-        .timeline()
+        anime.timeline()
           .add({
               targets: '.iconLanguage',
               rotate: 0,
-              duration: 800,
+              duration: 1000,
               easing: 'easeOutExpo',
           })
       }
       else{
-        this.$anime
-          .timeline()
-          .add({
-              targets: '.iconLanguage',
-              rotate: 180,
-              duration: 800,
-              easing: 'easeOutExpo',
-          });
-        this.$anime
-        .timeline()
-          .add({
-              targets: '.lang-list',
-              translateY: 0,
-              opacity: 1,
-              duration: 300,
-              easing: 'easeInExpo',
-          })
+        anime.timeline()
+        .add({
+          targets: '.lang-list',
+          translateY: translateY1,
+          opacity: 1,
+          duration: 350,
+          delay: 50,
+          easing: 'linear',
+          begin: function() {
+            document.querySelector('.lang-list').style.display = 'flex';
+          }
+        })
+        anime.timeline().add({
+          targets: '.iconLanguage',
+          rotate: 180,
+          duration: 1000,
+          easing: 'easeOutExpo',
+        });
+        
       }
       this.active = !this.active;
     }
   },
   mounted(){
     setTimeout(() => {
-      this.$anime
-        .timeline()
+      var iniTranslateY = 20
+      if(this.windowSize == 0){
+        iniTranslateY = -20
+      }
+      anime.timeline()
         .add({
             targets: '.main-lang-btn',
             translateY: -25,
@@ -89,11 +104,12 @@ export default {
         })
         .add({
             targets: '.lang-list',
-            translateY: 20,
+            translateY: iniTranslateY,
             opacity: 0,
             duration: 100,
-            easing: 'easeOutExpo',
+            easing: 'easeOutExpo'
         });
+      
     }, 100);
     var userLang = navigator.language || navigator.userLanguage;
     var lang = userLang.split('-')[0]
@@ -105,32 +121,34 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 button:focus { 
   outline: none;
 }
 .lang{
-  color: var(--colorWhite);
+  --langColor: var(--aquaMarine1);
+  --langColor2:var(--colorWhite);
   position: absolute;
-  bottom: 4%;
-  right: 2vw;
+  bottom: 2.5vh;
+  right: 2.5vw;
   z-index: 50;
   transition: all 0.3s ease-in-out;
 }
 .lang-list{
-  opacity: 0;
+  opacity: hidden;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1em;
+  display: none;
 }
 .lang-opt{
   padding: 0.2em 0 0.2em 0;
-  transition: all .1s ease-in;
-  font-size: 1.1em;
+  transition: all .2s ease-in;
+  font-size: 2vh;
+  color: var(--langColor2);
 }
 .lang-opt:hover{
-  text-shadow: 0 0 10px var(--neonPink1), 0 0 20px var(--neonPink1);
-  font-size: 1.4em;
+  text-shadow: 0 0 10px var(--langColor), 0 0 20px var(--langColor);
+  font-size: 2.5vh;
 }
 .main-lang-btn{
   position: relative;
@@ -138,23 +156,20 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all .15s ease-in-out;
+  transition: all .35s ease-in-out;
+  color: var(--langColor2);
+  border-radius: 50%;
+  font-size: 2.25vh;
 }
-.circle{
+/*.circle{
   width: 2rem;
   height: 2rem;
   z-index: 55;
   position: absolute;
   border-radius: 50%;
-}
-.bgColor1{
-  background-color: var(--bgcolor1)
-}
-.bgColor2{
-  background-color: var(--bgcolor2)
-}
+}*/
 .activeColor{
-  color: var(--neonPink1);
+  color: var(--langColor);
 }
 .hue{
   width: 100%;
@@ -163,8 +178,8 @@ button:focus {
   width: 3rem;
   height: 3rem;
   margin: 20px;
-  background: linear-gradient(45deg, transparent 60%, var(--neonPink1));
-  animation: neon-loader 3s linear 1s infinite;
+  /*background: linear-gradient(45deg, transparent 60%, var(--langColor));
+  animation: neon-loader 3s linear 1s infinite;*/
   border-radius: 50%;
   z-index: 51;
 }
@@ -174,22 +189,21 @@ button:focus {
   z-index: 60;
 }
 .main-lang-btn:hover{
-  background: var(--neonPink1);
   border-radius: 50%;
   /*transition: all .3s ease-in-out;*/
-  transition: all .2s ease-in-out;
-  box-shadow: 0 0 10px var(--neonPink1),
-              0 0 30px var(--neonPink1),
-              0 0 50px var(--neonPink1);
+  transition: all .35s ease-in-out;
+  box-shadow: 0 0 10px var(--langColor),
+              0 0 30px var(--langColor);
 }
+
 .main-lang-btn:hover .hue{
   animation-play-state: paused;
   background: transparent;
 }
-.main-lang-btn:hover .circle{
+/*.main-lang-btn:hover .circle{
   width: 1.75rem;
   height: 1.75rem;
-}
+}*/
 @keyframes neon-loader {
   from {
     transform: rotate(0deg);
@@ -200,4 +214,15 @@ button:focus {
     /*filter: hue-rotate(240deg);*/
   }
 }
+
+/* IMPORTANT TODO: RULE FOR BUTTON FONT SIZE TO BE DIFFERENT WHEN SCREEN HEIGHT IS LESS*/
+
+@media (max-aspect-ratio: 1/1) {
+    .lang{
+      top:2.5vh;
+      bottom: unset;
+    }
+}
+
 </style>
+

@@ -44,7 +44,6 @@ export default {
   },
   mounted(){
     setTimeout(() => {
-      console.log(this.delay)
       this.animStyle = "strokeDasharray:0 500";
       this.textOpac = "opacity:1";
     }, this.delay);

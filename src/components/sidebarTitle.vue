@@ -83,4 +83,10 @@ export default{
     0%{ background-color: var(--color1); }
     100%{ background-color: var(--color2); }
 }
+
+@media (max-aspect-ratio: 1/1) {
+  .sidebar-title{
+    width: fit-content;
+  }
+}
 </style>

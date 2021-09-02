@@ -1,6 +1,6 @@
 <template>
   <div class="routeContent">
-    <div class="h-full w-screen flex flex-col justify-center skills">
+    <div class="h-full w-full flex flex-col justify-center skills">
       <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Skills</p>
       <div class="skills-content flex flex-col">
         <div class="flex flex-row items-center">
@@ -49,7 +49,7 @@ export default {
   props:["full"],
   data(){
     return{
-      delay:1500,
+      delay:2000,
       color:1,
       hoverActive: false
     }
@@ -60,7 +60,6 @@ export default {
   },
   methods:{
     handleHover(hover){
-      console.log(hover);
       this.hoverActive = hover;
     }
   },

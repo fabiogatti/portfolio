@@ -175,6 +175,7 @@ svg {
 
 .icon-container:hover .contact-icon{
   background-position: 100% 100%;
+  transform: scale(1.1);
 }
 
 .side-text{

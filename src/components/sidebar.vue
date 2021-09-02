@@ -1,40 +1,64 @@
 <template>
-    <div class="main-side">
-        <div class="sidebar" :class="[ full ? '' : 'normal-sidebar' ]">
-            <div class="top-sidebar anim-end" :class="[ fullScreen ? 'scale-top' : '' ]">
-                <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
-                    <img class='profile-pic' src="../assets/img/profile.png" alt="">
-                    <p>{{ $t('sidebar.profilePicText') }}</p>
+    <div class="navbar">
+        <div class="main-side">
+            <div class="sidebar" :class="[ full ? '' : 'normal-sidebar' ]">
+                <div class="top-sidebar anim-end" :class="[ fullScreen ? 'scale-top' : '' ]">
+                    <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
+                        <img class='profile-pic' src="../assets/img/profile.png" alt="">
+                        <p>{{ $t('sidebar.profilePicText') }}</p>
+                    </div>
+                    <div class="description-div">
+                        <p class="name">Fabio Gatti</p>
+                        <p class="position font-neon" v-show="!fullScreen">{{ $t('sidebar.frontendEngineer') }}</p>
+                    </div>
                 </div>
-                <div class="description-div">
-                    <p class="name">Fabio Gatti</p>
-                    <p class="position font-neon" v-show="!fullScreen">{{ $t('sidebar.frontendEngineer') }}</p>
-                </div>
-            </div>
 
-            <div class="welcome-msg anim-end" v-show="fullScreen">
-                <p class="font-neon">{{ $t('sidebar.welcomeMsg1') }}</p>
-                <p class="font-neon">{{ $t('sidebar.welcomeMsg2') }}</p>
-            </div>
-            
-            <div class="bottom-sidebar" :class="[ fullScreen ? 'bottom-full' : 'bottom-normal' ]">
-                <div class="item anim-end" v-for="item in sidebarMenu" :key="item.id">
-                    <sidebarTitle :item="item" :active="active" :full="fullScreen" @clicked="handleLinkClicked(item.id)"></sidebarTitle>
+                <div class="welcome-msg anim-end" v-show="fullScreen" :style="[ windowSize==0 ? {transform:'scale(0.8)'}:{}]">
+                    <p class="font-neon">{{ $t('sidebar.welcomeMsg1') }}</p>
+                    <p class="font-neon">{{ $t('sidebar.welcomeMsg2') }}</p>
                 </div>
+                
+                <div class="bottom-sidebar" :class="[ fullScreen && windowSize > 0 ? 'bottom-full' : 'bottom-normal' ]">
+                    <div class="item anim-end" v-for="item in sidebarMenu" :key="item.id">
+                        <sidebarTitle :item="item" :active="active" :full="fullScreen" @clicked="handleLinkClicked(item.id)"></sidebarTitle>
+                    </div>
+                </div>
+            </div>
+            <transition name="fadeRight">
+                <div class="line" v-if="!fullScreen"></div>
+            </transition>
+            
+        </div>
+        <div class="mobile-nav flex flex-row items-center justify-around" style="opacity:0">
+            <!--<div class="mobile-nav flex flex-row items-center justify-around" v-if="!full">-->
+            <div class="flex flex-col items-center">
+                 <font-awesome-icon class="icon-nav" icon="user"/>
+                 <p class="nav-text">About me</p>
+            </div>
+            <div class="flex flex-col items-center">
+                 <font-awesome-icon class="icon-nav" icon="cogs"/>
+                 <p class="nav-text">Skills</p>
+            </div>
+            <div class="flex flex-col items-center">
+                 <font-awesome-icon class="icon-nav" icon="briefcase"/>
+                 <p class="nav-text">Portfolio</p>
+            </div>
+            <div class="flex flex-col items-center">
+                 <font-awesome-icon class="icon-nav" icon="phone"/>
+                 <p class="nav-text">Contact</p>
             </div>
         </div>
-        <transition name="fadeRight">
-            <div class="line" v-if="!fullScreen"></div>
-        </transition>
     </div>
+    
 </template>
 
 <script>
 import sidebarTitle from "./sidebarTitle.vue";
+import anime from 'animejs';
 
 export default {
     name:"sidebar",
-    props:['full','activeElem'],
+    props:['full','activeElem','windowSize'],
     components: {
         sidebarTitle
     },
@@ -53,63 +77,147 @@ export default {
     methods:{
         handleLinkClicked(id){
             if(this.fullScreen){
-                this.$anime
-                    .timeline()
-                    .add({
-                        targets: '.top-sidebar',
-                        translateY: -50,
-                        opacity: 0,
-                        duration: 600,
-                        easing: 'easeOutExpo',
-                    })
-                    .add({
-                        targets: '.welcome-msg',
-                        translateY: -50,
-                        opacity: 0,
-                        duration: 600,
-                        easing: 'easeOutExpo',
-                    })
-                    .add({
-                        targets: '.item',
-                        translateY: -50,
-                        opacity: 0,
-                        duration: 600,
-                        easing: 'easeOutExpo',
-                    })
-                    .add({
-                        targets: '.sidebar',
-                        width: '20vw',
-                        duration: 300,
-                        easing: 'easeOutExpo',
-                        delay: 0
-                    })
-                    .add({
-                        targets: '.anim-end',
-                        translateY: 0,
-                        translateX: -30,
-                        opacity: 0,
-                        duration: 100,
-                        easing: 'easeInExpo',
-                    })
-                    .add({
-                        targets: '.anim-end',
-                        translateX: 0,
-                        opacity: 1,
-                        duration: 800,
-                        easing: 'easeInExpo',
-                        delay:500
-                    });
-                    setTimeout(() => {
-                        this.fullScreen = false;
-                        this.$emit('removefull');
-                    }, 2100);
-                    //animation.finished.then(()=>{ console.log('finished') });
+                if(this.windowSize == 2){
+                    anime.timeline()
+                        .add({
+                            targets: '.top-sidebar',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.welcome-msg',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.item',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.mobile-nav',
+                            translateX: '50%',
+                            translateY: '5vh',
+                            opacity: 0,
+                            duration: 10,
+                            easing: 'easeInExpo'
+                        })
+                        .add({
+                            targets: '.sidebar',
+                            width: '20vw',
+                            duration: 300,
+                            easing: 'easeOutExpo',
+                            delay: 0,
+                            begin:()=>{
+                                this.fullScreen = false;
+                                this.$emit('removefull');
+                            }
+                        })
+                        .add({
+                            targets: '.anim-end',
+                            translateY: 0,
+                            translateX: -30,
+                            opacity: 0,
+                            duration: 10,
+                            easing: 'easeInExpo',
+                            
+                        })
+                        .add({
+                            targets: '.anim-end',
+                            translateX: 0,
+                            opacity: 1,
+                            duration: 800,
+                            easing: 'easeInExpo',
+                            delay:500
+                        });
+                    }
+                else{
+                    anime.timeline()
+                        .add({
+                            targets: '.top-sidebar',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.welcome-msg',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.item',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.mobile-nav',
+                            translateY: '5vh',
+                            translateX: '50%',
+                            opacity: 0,
+                            duration:10,
+                            easing:'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.sidebar',
+                            width: '0vw',
+                            duration: 300,
+                            easing: 'easeOutExpo',
+                            complete:()=>{
+                                setTimeout(() => {
+                                    this.fullScreen = false;
+                                    this.$emit('removefull');
+                                }, 850);
+                            }
+                        })
+                        .add({
+                            targets: '.mobile-nav',
+                            translateY: '0px',
+                            translateX: '50%',
+                            opacity: 1,
+                            duration: 300,
+                            easing:'easeOutExpo',
+                            delay:1000,
+                        })
+                        .add({
+                            targets: '.anim-end',
+                            translateY: 0,
+                            translateX: -30,
+                            opacity: 0,
+                            duration: 10,
+                            easing: 'easeInExpo',
+                            
+                        })
+                        /*.add({
+                            targets: '.sidebar',
+                            opacity: 1,
+                            duration: 10,
+                            easing:'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.anim-end',
+                            translateY: 0,
+                            translateX: -30,
+                            opacity: 0,
+                            duration: 10,
+                            easing: 'easeInExpo',
+                        });*/
+                }
             }
             this.active = id;
         }
     },
     created(){
-        console.log(this.full)
         if(this.full){
             this.fullScreen = this.full;
         }
@@ -119,8 +227,7 @@ export default {
     },
     mounted(){
         setTimeout(() => {
-            this.$anime
-            .timeline()
+            anime.timeline()
             .add({
                 targets: '.sidebar',
                 translateY: -25,
@@ -137,16 +244,89 @@ export default {
         }, 100);
         if(this.activeElem != 0){
             this.active = this.activeElem;
-        }  
+        }
+    },
+    watch:{
+        windowSize(newVal,oldVal){
+            if(!this.full){
+                if(oldVal < 2 && newVal==2){
+                    /*anime({
+                        targets: '.sidebar',
+                        translateX: 0,
+                        opacity: 1,
+                        duration: 800,
+                        easing: 'easeInExpo',
+                    });*/
+                    anime({
+                        targets: '.mobile-nav',
+                        translateY: '5vh',
+                        translateX: '50%',
+                        opacity: 0,
+                        duration: 400,
+                        easing: 'linear',
+                    })
+                    /*anime({
+                        targets: '.mobile-nav',
+                        translateY: '5vh',
+                        opacity: 0,
+                        duration: 800,
+                        easing: 'easeOutExpo',
+                    })*/
+                    anime.timeline()
+                        .add({
+                            targets: '.sidebar',
+                            width: '20vw',
+                            opacity: 1,
+                            duration: 200,
+                            delay: 300,
+                            easing: 'easeInExpo',
+                        })
+                        .add({
+                            targets: '.anim-end',
+                            translateX: 0,
+                            opacity: 1,
+                            duration: 500,
+                            delay: 750,
+                            easing: 'linear',
+                        })
+                }
+                else if(oldVal == 2 && newVal < 2){
+                    anime({
+                        targets: '.mobile-nav',
+                        translateY: 0,
+                        translateX: '50%',
+                        opacity: 1,
+                        duration: 800,
+                        delay:350,
+                        easing: 'easeInExpo',
+                    });
+                    anime.timeline()
+                        .add({
+                            targets: '.anim-end',
+                            translateX: -30,
+                            opacity: 0,
+                            duration: 250,
+                            easing: 'linear',
+                        })
+                        .add({
+                            targets: '.sidebar',
+                            width: 0,
+                            duration: 300,
+                            easing: 'easeOutExpo',
+                        })
+                }
+            }
+            
+        }
     }
 }
 </script>
 
-<style>
+<style lang="scss">
 .main-side{
     display: flex;
     flex-direction: row;
-    background-color: var(--bgcolor2);
+    /*background-color: var(--bgcolor2);*/
 }
 .sidebar{
     width: 100vw;
@@ -172,7 +352,7 @@ p{
 }
 .scale-top{
     margin-top: 4vh;
-    scale: 1.4;
+    transform: scale(1.4);
 }
 .profile-div{
     margin-top: 10vh;
@@ -242,7 +422,6 @@ p{
     display: flex;
     flex-direction: column;
     color: var(--grey1);
-    animation: all 0.3s ease-in-out;
     margin-bottom: 10vh;
 }
 .welcome-msg p{
@@ -281,6 +460,23 @@ p{
     animation-delay: 0.3s;
     z-index: 10;
 }
+.mobile-nav{
+    z-index: 150;
+    width: 50vw;
+    position: absolute;
+    bottom: 0;
+    height: 7.5vh;
+    background-color: var(--colorWhite);
+    right:50%;
+    transform: translate(50%);
+    padding: 1.5vh 1vh 0 1vh;
+    border-radius: 15px 15px 0 0;
+    transition: all 0.3s ease-in-out;
+    .nav-text{
+        font-size: 1.5vh;
+    }
+}
+
 @keyframes colorAnim {
     0%{color: var(--color1) }
     50%{color: var(--color2) }
@@ -307,6 +503,51 @@ p{
     0%{background-position:50% 0%; box-shadow:0 0 30px 10px #18aeca }
     50%{background-position:50% 100%; box-shadow: 0 0 30px 10px #2af598 ;}
     100%{background-position:50% 0%; box-shadow:0 0 30px 10px #18aeca;}
+}
+
+
+@media (max-aspect-ratio: 8/5) {
+    /*.main-side{
+        display: none;
+    }*/
+    /*.normal-sidebar{
+        display: none;
+    }*/
+    .line{
+        display: none;
+    }
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .scale-top{
+        transform:scale(1.15);
+        .profile-div{
+            margin-top: 5vh;
+        }
+    }
+    .top-sidebar{
+        height: 35vh;
+    }
+    .welcome-msg{
+        margin-bottom: 1vh;
+        height: 20vh;
+    }
+    .normal-sidebar{
+        display: none;
+    }
+    .mobile-nav{
+        width: 100vw;
+        border-radius: 0;
+        .nav-text{
+            font-size: 1.5vh;
+        }
+    }
+    .item{
+        margin-bottom: 1vh;
+    }
+    .bottom-sidebar{
+        align-items: center;
+    }
 }
 
 </style>
