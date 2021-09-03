@@ -1,6 +1,5 @@
 <template>
-  <div class="routeContent">
-    <div class="h-full w-full flex flex-col justify-center contact">
+  <div class="routeContent h-full w-full flex flex-col justify-center contact">
       <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Contact</p>
       <p class="contentSubtitle">Like what you see? Let's talk!</p>
       <p class="contentText mt2">Currently I'm the middle of a job hunt. Mainly looking for a company that really values its employees, has a positive work environment and could also offer plenty of opportunities for professional growth, would be great if it was remote focused! </p>
@@ -66,8 +65,6 @@
           </clipPath>
         </defs>
       </svg>
-
-    </div>
   </div>
 </template>
 

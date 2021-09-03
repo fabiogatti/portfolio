@@ -269,6 +269,7 @@ body{
 .routeContent{
   width: 100%;
   padding: 2.5vh 10vw 2.5vh 5vw;
+  position: absolute;
 }
 
 .mt1{
@@ -302,6 +303,12 @@ body{
 .ml6{
   margin-left: 6vw;
 }
+
+html{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 
 @keyframes neon-title {
   from {

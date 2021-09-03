@@ -5,7 +5,7 @@
       <button class="lang-opt" @click="setLanguage('it')" :class="[ activeLang == 'it' ? 'activeColor' : '']">IT</button>
       <button class="lang-opt" @click="setLanguage('es')" :class="[ activeLang == 'es' ? 'activeColor' : '']">ES</button>
     </div>
-    <button class="main-lang-btn mt1" @click="toggleButtons()" :style="[ windowSize == 0 ? {order:1} : '']">
+    <button class="main-lang-btn" @click="toggleButtons()" :style="[ windowSize == 0 ? {order:1} : '']">
       <div class="hue"></div>
       <!--<div class="circle"></div>-->
       <font-awesome-icon class="iconLanguage" icon="globe" id='globe' :class="[ active ? 'activeColor' : '' ]"/>
@@ -32,10 +32,10 @@ export default {
     },
     toggleButtons(){
       var translateY1 = 0;
-      var translateY2 = 40;
+      var translateY2 = '3vh';
       if(this.windowSize == 0){
-        translateY1 = 10;
-        translateY2 = -40;
+        translateY1 = '1vh';
+        translateY2 = '-3vh';
       }
 
       if(this.active){
@@ -117,6 +117,27 @@ export default {
       this.$i18n.locale = lang;
       this.activeLang =  lang;
     }
+  },
+  watch:{
+    windowSize(newVal){
+      if(!this.active){
+         if(newVal >= 1){
+          anime({
+            targets: '.lang-list',
+            translateY: '3vh',
+            duration: 10
+          })
+        }
+        else if(newVal == 0){
+          anime({
+            targets: '.lang-list',
+            translateY: '-3vh',
+            duration: 10
+          })
+        }
+      }
+     
+    }
   }
 }
 </script>
@@ -130,7 +151,7 @@ button:focus {
   --langColor2:var(--colorWhite);
   position: absolute;
   bottom: 2.5vh;
-  right: 2.5vw;
+  right: 2.5vh;
   z-index: 50;
   transition: all 0.3s ease-in-out;
 }
@@ -148,7 +169,8 @@ button:focus {
 }
 .lang-opt:hover{
   text-shadow: 0 0 10px var(--langColor), 0 0 20px var(--langColor);
-  font-size: 2.5vh;
+  /*font-size: 2.5vh;*/
+  transform: scale(1.3);
 }
 .main-lang-btn{
   position: relative;
@@ -160,6 +182,7 @@ button:focus {
   color: var(--langColor2);
   border-radius: 50%;
   font-size: 2.25vh;
+  margin-top: 1.75vh;
 }
 /*.circle{
   width: 2rem;
@@ -217,12 +240,35 @@ button:focus {
 
 /* IMPORTANT TODO: RULE FOR BUTTON FONT SIZE TO BE DIFFERENT WHEN SCREEN HEIGHT IS LESS*/
 
+@media (max-height:650px) {
+  .main-lang-btn{
+    font-size: 3vh;
+  }
+  .lang-opt{
+    font-size: 2.4vh;
+  }
+}
+
+@media (max-height:450px) {
+  .lang-opt{
+    font-size: 2.75vh;
+  }
+  .main-lang-btn{
+    font-size: 4vh;
+  }
+}
+
 @media (max-aspect-ratio: 1/1) {
     .lang{
       top:2.5vh;
       bottom: unset;
     }
+    .lang-list{
+      margin-top: 1.75vh;
+    }
 }
+
+
 
 </style>
 

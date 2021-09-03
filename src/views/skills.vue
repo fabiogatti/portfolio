@@ -1,42 +1,40 @@
 <template>
-  <div class="routeContent">
-    <div class="h-full w-full flex flex-col justify-center skills">
-      <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Skills</p>
-      <div class="skills-content flex flex-col">
-        <div class="flex flex-row items-center">
-          <hoverTwoTexts class="skill-hover" :trans="2">
-            <font-awesome-icon slot="main" class="skill-icon" icon="code"/>
-            <p slot="second" class="skill-subtitle">Code</p>
-          </hoverTwoTexts>
-          <progressCircle @hover="handleHover" :color="1" :percentage="60" :text="'JS/TS'" :fSize="1" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="1" :percentage="55" :text="'HTML'" :fSize="1" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="1" :percentage="70" :text="'CSS'" :fSize="1" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="1" :percentage="65" :text="'VueJs'" :fSize="1" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="1" :percentage="55" :text="'Git'" :fSize="1" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="1" :percentage="70" :text="'Rest'" :fSize="1" :delay="delay" :active="hoverActive"/>
-        </div>
-        <div class="flex flex-row mt-16 items-center">
-          <hoverTwoTexts class="skill-hover" :trans="2">
-            <font-awesome-icon slot="main" class="skill-icon" icon="paint-brush"/>
-            <p slot="second" class="skill-subtitle">Design</p>
-          </hoverTwoTexts>
-          <progressCircle @hover="handleHover" :color="0" :percentage="30" :text="'AdobeXD'" :fSize="0" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="0" :percentage="35" :text="'AdobeAi'" :fSize="0" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="0" :percentage="30" :text="'AdobePS'" :fSize="0" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="0" :percentage="45" :text="'Figma'" :fSize="0" :delay="delay" :active="hoverActive"/>
-        </div>
-        <div class="flex flex-row mt-16 items-center">
-          <hoverTwoTexts class="skill-hover" :trans="2">
-            <font-awesome-icon slot="main" class="skill-icon" icon="language"/>
-            <p slot="second" class="skill-subtitle">Language</p>
-          </hoverTwoTexts>
-          <progressCircle @hover="handleHover" :color="2" :percentage="90" :text="'Es'" :fSize="2" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="2" :percentage="75" :text="'En'" :fSize="2" :delay="delay" :active="hoverActive"/>
-          <progressCircle @hover="handleHover" :color="2" :percentage="40" :text="'It'" :fSize="2" :delay="delay" :active="hoverActive"/>
-        </div>
+  <div class="routeContent h-full w-full flex flex-col justify-center skills">
+    <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Skills</p>
+    <div class="skills-content flex flex-col">
+      <div class="flex flex-row items-center">
+        <hoverTwoTexts class="skill-hover" :trans="2">
+          <font-awesome-icon slot="main" class="skill-icon" icon="code"/>
+          <p slot="second" class="skill-subtitle">Code</p>
+        </hoverTwoTexts>
+        <progressCircle @hover="handleHover" :color="1" :percentage="60" :text="'JS/TS'" :fSize="1" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="1" :percentage="55" :text="'HTML'" :fSize="1" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="1" :percentage="70" :text="'CSS'" :fSize="1" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="1" :percentage="65" :text="'VueJs'" :fSize="1" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="1" :percentage="55" :text="'Git'" :fSize="1" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="1" :percentage="70" :text="'Rest'" :fSize="1" :delay="delay" :active="hoverActive"/>
       </div>
-      
+      <div class="flex flex-row mt6 items-center">
+        <hoverTwoTexts class="skill-hover" :trans="2">
+          <font-awesome-icon slot="main" class="skill-icon" icon="paint-brush"/>
+          <p slot="second" class="skill-subtitle">Design</p>
+        </hoverTwoTexts>
+        <progressCircle @hover="handleHover" :color="0" :percentage="30" :text="'AdobeXD'" :fSize="0" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="0" :percentage="35" :text="'AdobeAi'" :fSize="0" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="0" :percentage="30" :text="'AdobePS'" :fSize="0" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="0" :percentage="45" :text="'Figma'" :fSize="0" :delay="delay" :active="hoverActive"/>
+      </div>
+      <div class="flex flex-row mt6 items-center">
+        <hoverTwoTexts class="skill-hover" :trans="2">
+          <font-awesome-icon slot="main" class="skill-icon" icon="language"/>
+          <p slot="second" class="skill-subtitle">Language</p>
+        </hoverTwoTexts>
+        <progressCircle @hover="handleHover" :color="2" :percentage="90" :text="'Es'" :fSize="2" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="2" :percentage="75" :text="'En'" :fSize="2" :delay="delay" :active="hoverActive"/>
+        <progressCircle @hover="handleHover" :color="2" :percentage="40" :text="'It'" :fSize="2" :delay="delay" :active="hoverActive"/>
+      </div>
     </div>
+      
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <transition name="fade">
       <font-awesome-icon class="icon" icon="chevron-right" id='arrow-icon' v-show="active==item.id && !full"/>
     </transition>
-    <router-link  class="route" id='about-link' :to='item.to' @click.native="$emit('clicked')">{{ item.text }}</router-link>
+    <router-link  class="route" :to='item.to' @click.native="$emit('clicked')">{{ item.text }}</router-link>
     <neonLine :hover="hover ? true : false" :active="active==item.id && full ? true : false" :disable="!full"></neonLine>
     <!--<div :style="[ full ? {'display':'block'} : {'display':'none'}, active==item.id && full ? { width:'100%' } : {} ]"></div>-->
   </div>

@@ -30,22 +30,8 @@
             
         </div>
         <div class="mobile-nav flex flex-row items-center justify-around" style="opacity:0">
-            <!--<div class="mobile-nav flex flex-row items-center justify-around" v-if="!full">-->
-            <div class="flex flex-col items-center">
-                 <font-awesome-icon class="icon-nav" icon="user"/>
-                 <p class="nav-text">About me</p>
-            </div>
-            <div class="flex flex-col items-center">
-                 <font-awesome-icon class="icon-nav" icon="cogs"/>
-                 <p class="nav-text">Skills</p>
-            </div>
-            <div class="flex flex-col items-center">
-                 <font-awesome-icon class="icon-nav" icon="briefcase"/>
-                 <p class="nav-text">Portfolio</p>
-            </div>
-            <div class="flex flex-col items-center">
-                 <font-awesome-icon class="icon-nav" icon="phone"/>
-                 <p class="nav-text">Contact</p>
+            <div v-for="item in sidebarMenu" :key="item.id+'nav'">
+                <mobileNavItem :item="item" :active="active" @clicked="handleLinkClicked(item.id)"></mobileNavItem>
             </div>
         </div>
     </div>
@@ -54,21 +40,23 @@
 
 <script>
 import sidebarTitle from "./sidebarTitle.vue";
+import mobileNavItem from "./mobileNavItem.vue";
 import anime from 'animejs';
 
 export default {
     name:"sidebar",
     props:['full','activeElem','windowSize'],
     components: {
-        sidebarTitle
+        sidebarTitle,
+        mobileNavItem
     },
     data(){
         return{
             sidebarMenu:[ 
-                { id:1, text:this.$t('sidebar.sidebarTitle1'), to:"/" },
-                { id:2, text:this.$t('sidebar.sidebarTitle2'), to:"/skills" },
-                { id:3, text:this.$t('sidebar.sidebarTitle3'), to:"/portfolio" },
-                { id:4, text:this.$t('sidebar.sidebarTitle4'), to:"/contact" },
+                { id:1, text:this.$t('sidebar.sidebarTitle1'), to:"/", icon:'user', mobileText:this.$t('sidebar.sidebarTitle1/5') },
+                { id:2, text:this.$t('sidebar.sidebarTitle2'), to:"/skills", icon:'cogs', mobileText:this.$t('sidebar.sidebarTitle2') },
+                { id:3, text:this.$t('sidebar.sidebarTitle3'), to:"/portfolio", icon:'briefcase', mobileText:this.$t('sidebar.sidebarTitle3') },
+                { id:4, text:this.$t('sidebar.sidebarTitle4'), to:"/contact", icon:'phone', mobileText:this.$t('sidebar.sidebarTitle4') },
             ],
             active:0,
             fullScreen:true
@@ -106,7 +94,10 @@ export default {
                             translateY: '5vh',
                             opacity: 0,
                             duration: 10,
-                            easing: 'easeInExpo'
+                            easing: 'easeInExpo',
+                            begin: function() {
+                                document.querySelector('.mobile-nav').style.display = 'none';
+                            },
                         })
                         .add({
                             targets: '.sidebar',
@@ -162,7 +153,7 @@ export default {
                         })
                         .add({
                             targets: '.mobile-nav',
-                            translateY: '5vh',
+                            translateY: '7.5vh',
                             translateX: '50%',
                             opacity: 0,
                             duration:10,
@@ -185,7 +176,7 @@ export default {
                             translateY: '0px',
                             translateX: '50%',
                             opacity: 1,
-                            duration: 300,
+                            duration: 500,
                             easing:'easeOutExpo',
                             delay:1000,
                         })
@@ -196,24 +187,10 @@ export default {
                             opacity: 0,
                             duration: 10,
                             easing: 'easeInExpo',
-                            
                         })
-                        /*.add({
-                            targets: '.sidebar',
-                            opacity: 1,
-                            duration: 10,
-                            easing:'easeOutExpo',
-                        })
-                        .add({
-                            targets: '.anim-end',
-                            translateY: 0,
-                            translateX: -30,
-                            opacity: 0,
-                            duration: 10,
-                            easing: 'easeInExpo',
-                        });*/
                 }
             }
+            console.log('clicked!');
             this.active = id;
         }
     },
@@ -250,28 +227,18 @@ export default {
         windowSize(newVal,oldVal){
             if(!this.full){
                 if(oldVal < 2 && newVal==2){
-                    /*anime({
-                        targets: '.sidebar',
-                        translateX: 0,
-                        opacity: 1,
-                        duration: 800,
-                        easing: 'easeInExpo',
-                    });*/
                     anime({
                         targets: '.mobile-nav',
-                        translateY: '5vh',
+                        translateY: '7.5vh',
                         translateX: '50%',
                         opacity: 0,
-                        duration: 400,
-                        easing: 'linear',
-                    })
-                    /*anime({
-                        targets: '.mobile-nav',
-                        translateY: '5vh',
-                        opacity: 0,
-                        duration: 800,
+                        duration: 1000,
                         easing: 'easeOutExpo',
-                    })*/
+                        complete: function() {
+                            console.log('done');
+                            document.querySelector('.mobile-nav').style.display = 'none';
+                        },
+                    })
                     anime.timeline()
                         .add({
                             targets: '.sidebar',
@@ -299,6 +266,9 @@ export default {
                         duration: 800,
                         delay:350,
                         easing: 'easeInExpo',
+                        begin: function() {
+                            document.querySelector('.mobile-nav').style.display = 'flex';
+                        },
                     });
                     anime.timeline()
                         .add({
@@ -469,12 +439,14 @@ p{
     background-color: var(--colorWhite);
     right:50%;
     transform: translate(50%);
-    padding: 1.5vh 1vh 0 1vh;
+    padding: 1vh 1vh 0 1vh;
     border-radius: 15px 15px 0 0;
     transition: all 0.3s ease-in-out;
-    .nav-text{
-        font-size: 1.5vh;
-    }
+
+    background: rgba( 255, 255, 255, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 6.0px );
+    -webkit-backdrop-filter: blur( 6.0px );
 }
 
 @keyframes colorAnim {
@@ -505,14 +477,7 @@ p{
     100%{background-position:50% 0%; box-shadow:0 0 30px 10px #18aeca;}
 }
 
-
 @media (max-aspect-ratio: 8/5) {
-    /*.main-side{
-        display: none;
-    }*/
-    /*.normal-sidebar{
-        display: none;
-    }*/
     .line{
         display: none;
     }
