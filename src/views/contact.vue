@@ -1,7 +1,7 @@
 <template>
   <div class="routeContent h-full w-full flex flex-col justify-center contact">
       <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Contact</p>
-      <p class="contentSubtitle">Like what you see? Let's talk!</p>
+      <p class="contentSubtitle mt2">Like what you see? Let's talk!</p>
       <p class="contentText mt2">Currently I'm the middle of a job hunt. Mainly looking for a company that really values its employees, has a positive work environment and could also offer plenty of opportunities for professional growth, would be great if it was remote focused! </p>
       <p class="contentText mt4">If those are some of the values that your company promotes then great! You can either:</p>
       <div class="flex flex-row mt4">
@@ -10,7 +10,7 @@
           <button class="email-button flex flex-row items-center mt4" @click="openMail"><font-awesome-icon class="email-icon mr-2" icon="envelope"/>Contact me!</button>
         </div>
         <div class="divider ml2"></div>
-        <div class="flex flex-col items-center side-text ml2" @mouseenter="hoverRight = true" @mouseleave="hoverRight = false">
+        <div class="flex flex-col items-center side-text ml6" @mouseenter="hoverRight = true" @mouseleave="hoverRight = false">
           <p class="contentSubtitle">Or get in touch via any of the following:</p>
           <div class="flex flex-row justify-center mt4">
             <div class="icon-container" @click="handleIconClick(0)">
@@ -18,12 +18,12 @@
               <div class="contact-icon icon-skype">
               </div>
             </div>
-            <div class="icon-container ml1" @click="handleIconClick(1)">
+            <div class="icon-container icon-margin" @click="handleIconClick(1)">
               <p class="clicked-icon fade1">Copied!</p>
               <div class="contact-icon icon-linkedin icon1">
               </div>
             </div>
-            <div class="icon-container ml1" @click="handleIconClick(2)">
+            <div class="icon-container icon-margin" @click="handleIconClick(2)">
               <p class="clicked-icon fade2">Copied!</p>
               <div class="contact-icon icon-github">
               </div>
@@ -93,12 +93,14 @@ export default {
       anime.timeline().add({
         targets: '.fade'+num,
         translateY: '-4vh',
+        translateX: '-50%',
         opacity: 1,
         easing: 'easeInOutSine',
         duration: 500
       }).add({
         targets: '.fade'+num,
         translateY:'-6vh',
+        translateX: '-50%',
         opacity:0,
         easing: 'easeInOutSine',
         delay: 1500,
@@ -106,6 +108,7 @@ export default {
       }).add({
         targets: '.fade'+num,
         translateY:0,
+        translateX: '-50%',
         opacity:0,
         easing: 'linear',
         delay: 50,
@@ -141,6 +144,7 @@ svg {
   height: 5vh;
   cursor: pointer;
   position: relative;
+  margin-left: 1vh;
 }
 .contact-icon{
   height: 5vh;
@@ -180,10 +184,12 @@ svg {
 }
 
 .divider{
+  transition: all 0.3s ease;
   border-radius: 25px;
-  width: 10px;
+  width: 6px;
   height: 100%;
   border: solid 3px var(--neonPink1);
+  background-color: var(--neonPink1);
   box-shadow: 
     0 0 10px var(--neonPink1),
     0 0 20px var(--neonPink1);
@@ -200,7 +206,7 @@ svg {
   font-size: 2vh;
   font-family: 'Neon';
   left:50%;
-  translate: -50% 0;
+  transform: translateX(-50%);
 }
 
 .email-button{
@@ -245,5 +251,31 @@ svg {
   box-shadow: 
     0 0 10px var(--aquaMarine1),
     0 0 30px var(--aquaMarine1);
+}
+
+
+.icon-margin{
+  margin-left: 1.5vw;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .icon-margin{
+    margin-left: 3vw;
+  }
+}
+
+@media (max-aspect-ratio: 5/8) {
+  .email-button{
+    font-size: 2vh;
+    padding:1vh 2vh;
+  }
+  .clicked-icon{
+    font-size: 1.85vh;
+  }
+  .divider{
+    width: 3px;
+    border: solid 1.5px var(--neonPink1);
+    box-shadow: 0 0 10px var(--neonPink1), 0 0 20px var(--neonPink1);
+  }
 }
 </style>

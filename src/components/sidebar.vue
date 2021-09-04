@@ -168,7 +168,7 @@ export default {
                                 setTimeout(() => {
                                     this.fullScreen = false;
                                     this.$emit('removefull');
-                                }, 850);
+                                }, 250);
                             }
                         })
                         .add({
@@ -244,9 +244,12 @@ export default {
                             targets: '.sidebar',
                             width: '20vw',
                             opacity: 1,
-                            duration: 200,
+                            duration: 400,
                             delay: 300,
                             easing: 'easeInExpo',
+                            begin:()=>{
+                                this.$emit('routerpos','relative');
+                            }
                         })
                         .add({
                             targets: '.anim-end',
@@ -254,7 +257,7 @@ export default {
                             opacity: 1,
                             duration: 500,
                             delay: 750,
-                            easing: 'linear',
+                            easing: 'linear'
                         })
                 }
                 else if(oldVal == 2 && newVal < 2){
@@ -281,8 +284,13 @@ export default {
                         .add({
                             targets: '.sidebar',
                             width: 0,
-                            duration: 300,
+                            duration: 500,
                             easing: 'easeOutExpo',
+                            complete:()=>{
+                                setTimeout(() => {
+                                    this.$emit('routerpos','absolute');
+                                }, 800);
+                            }
                         })
                 }
             }
@@ -436,7 +444,7 @@ p{
     position: absolute;
     bottom: 0;
     height: 7.5vh;
-    background-color: var(--colorWhite);
+    /*background-color: var(--colorWhite);*/
     right:50%;
     transform: translate(50%);
     padding: 1vh 1vh 0 1vh;
@@ -444,6 +452,7 @@ p{
     transition: all 0.3s ease-in-out;
 
     background: rgba( 255, 255, 255, 0.30 );
+    background: linear-gradient(to top, --colorWhite, --bgcolor1);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 6.0px );
     -webkit-backdrop-filter: blur( 6.0px );

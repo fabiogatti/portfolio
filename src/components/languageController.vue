@@ -254,7 +254,7 @@ button:focus {
     font-size: 2.75vh;
   }
   .main-lang-btn{
-    font-size: 4vh;
+    font-size: 3.5vh;
   }
 }
 

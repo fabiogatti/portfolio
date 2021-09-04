@@ -22,8 +22,17 @@ export default {
   },
   methods:{
     resizeViewBox(){
-      this.height = window.innerHeight/1.5+'px';
-      this.width = window.innerWidth/1.5+'px';
+      var w =  window.innerWidth;
+      var h =  window.innerHeight;
+      if(w/h>1){
+        this.height = window.innerHeight/1.5+'px';
+        this.width = window.innerWidth/1.5+'px';
+      }
+      else{
+        this.height = window.innerHeight/1+'px';
+        this.width = window.innerWidth/1+'px';
+      }
+      
     }
   },
   computed:{

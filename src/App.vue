@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <sidebar :full="full" :activeElem="activeElem" :windowSize='windowSize' @removefull="full=false" />
+    <sidebar :full="full" :activeElem="activeElem" :windowSize='windowSize' @removefull="full=false" @routerpos="handleRouterPos"/>
     <!--<div class="absolute z-5 blob1">
       <transition name="fadeContentSlow">
         <svg width="600" height="450" v-show="!full">
@@ -9,7 +9,7 @@
       </transition>
     </div>-->
     <transition :name="transitionName">
-      <router-view v-if="!full" class="router" :full="firstSelected"/>
+      <router-view v-if="!full" class="router" :full="firstSelected" :style="[{position:routerPos}]" :windowSize='windowSize'/>
     </transition>
     <language-controller :full="full" :windowSize='windowSize'/>
   </div>
@@ -32,7 +32,8 @@ export default {
       activeElem: 0,
       transitionName: 'fadeContentSlow',
       firstSelected:false,
-      windowSize: 2
+      windowSize: 2,
+      routerPos: 'relative'
     }
   },
   methods:{
@@ -49,6 +50,9 @@ export default {
         return 2;
       }
     },
+    handleRouterPos(pos){
+      this.routerPos = pos;
+    }
   },
   created(){
     /*var router = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];*/
@@ -85,6 +89,8 @@ export default {
       setTimeout(() => {
         this.transitionName = 'fadeContentNormal';
         this.firstSelected = false;
+        if(this.windowSize != 2)
+          this.routerPos = 'absolute';
       }, 1500);
     }
 } 
@@ -164,6 +170,7 @@ body{
   --color1: #18aeca;
   --color2: #2af598;
   --grey1: #acacac;
+  --neonPurple1:#B026FF;
   
   background-color: var(--bgcolor1);
   display: flex;
@@ -216,7 +223,7 @@ body{
 
 .fadeContentNormal-enter-active  {
   transition: all 0.55s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  transition-delay: 0.55s;
+  transition-delay: 0.65s;
 }
 .fadeContentNormal-leave-active{
   transition: all 0.55s cubic-bezier(1.0, 0.5, 0.8, 1.0);
@@ -257,19 +264,20 @@ body{
   font-family: "Sansation_Regular";
   font-size: 2.1vh;
   color: var(--textColor);
+  transition: all 0.3s ease;
 }
 
 .contentSubtitle{
   font-family: "Neon";
   font-size: 2.75vh;
   color: var(--neonPink1Light);
+  transition: all 0.3s ease;
 }
 
 
 .routeContent{
-  width: 100%;
+  width: 80vw;
   padding: 2.5vh 10vw 2.5vh 5vw;
-  position: absolute;
 }
 
 .mt1{
@@ -303,12 +311,18 @@ body{
 .ml6{
   margin-left: 6vw;
 }
+.ml8{
+  margin-left: 8vw;
+}
 
-html{
+html,.router,.routeContent{
     overflow-x: hidden;
     overflow-y: hidden;
 }
 
+a,button,div{
+  -webkit-tap-highlight-color: transparent;
+}
 
 @keyframes neon-title {
   from {
@@ -365,6 +379,27 @@ html{
 @media (max-aspect-ratio: 8/5){
   .router{
     padding-bottom: 10vh;
+  }
+}
+
+@media (max-aspect-ratio: 1/1){
+  .routeContent{
+    padding: 2vh 2vw 2vh 2vw;
+  }
+  .router{
+    padding-bottom: 10vh;
+  }
+}
+
+@media (max-aspect-ratio: 5/8){
+  .contentTitle{
+    font-size: 4vh;
+  }
+  .contentSubtitle{
+    font-size: 2.25vh;
+  }
+  .contentText{
+    font-size: 1.8vh;
   }
 }
 

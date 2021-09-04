@@ -1,7 +1,7 @@
 <template>
   <div class="h-full w-full flex flex-col justify-center routeContent about">
     <h1 class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">About me</h1>
-    <div class="mt4">
+    <div class="mt2">
       <h3 class="contentSubtitle">I'm a frontend developer, currently living in Cali - Colombia.</h3>
       <div class="flex flex-row">
         <div>
@@ -20,7 +20,7 @@
       </div>
       
     </div>
-    <div class="mt6">
+    <div class="mt4">
       <h3 class="contentSubtitle">Something more personal</h3>
       <p class="contentText mt2">
         I love playing videogames (always been addicted to Dota 2). Avid enjoyer of terror movies and cooking desserts.
