@@ -128,7 +128,7 @@ export default {
 }
 .skill-hover{
   margin-right: 2vw;
-  width: 4vw;
+  width: 6vw;
 }
 .skill-icon{
   font-size: 4vh;

@@ -8,7 +8,7 @@
         </svg>
       </transition>
     </div>-->
-    <transition :name="transitionName">
+    <transition :name="firstSelected && windowSize == 2 ? 'fadeContentSlow' : 'fadeContentNormal'">
       <router-view v-if="!full" class="router" :full="firstSelected" :style="[{position:routerPos}]" :windowSize='windowSize'/>
     </transition>
     <language-controller :full="full" :windowSize='windowSize'/>
@@ -30,7 +30,6 @@ export default {
     return{
       full:true,
       activeElem: 0,
-      transitionName: 'fadeContentSlow',
       firstSelected:false,
       windowSize: 2,
       routerPos: 'relative'
@@ -87,7 +86,6 @@ export default {
     full(){
       this.firstSelected = true;
       setTimeout(() => {
-        this.transitionName = 'fadeContentNormal';
         this.firstSelected = false;
         if(this.windowSize != 2)
           this.routerPos = 'absolute';

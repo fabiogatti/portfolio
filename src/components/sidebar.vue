@@ -153,7 +153,7 @@ export default {
                         })
                         .add({
                             targets: '.mobile-nav',
-                            translateY: '7.5vh',
+                            translateY: '9vh',
                             translateX: '50%',
                             opacity: 0,
                             duration:10,
@@ -168,7 +168,7 @@ export default {
                                 setTimeout(() => {
                                     this.fullScreen = false;
                                     this.$emit('removefull');
-                                }, 250);
+                                }, 1000);
                             }
                         })
                         .add({
@@ -229,7 +229,7 @@ export default {
                 if(oldVal < 2 && newVal==2){
                     anime({
                         targets: '.mobile-nav',
-                        translateY: '7.5vh',
+                        translateY: '9vh',
                         translateX: '50%',
                         opacity: 0,
                         duration: 1000,
@@ -443,7 +443,7 @@ p{
     width: 50vw;
     position: absolute;
     bottom: 0;
-    height: 7.5vh;
+    height: 9vh;
     /*background-color: var(--colorWhite);*/
     right:50%;
     transform: translate(50%);
@@ -451,11 +451,16 @@ p{
     border-radius: 15px 15px 0 0;
     transition: all 0.3s ease-in-out;
 
-    background: rgba( 255, 255, 255, 0.30 );
+    /*background: rgba( 255, 255, 255, 0.30 );
     background: linear-gradient(to top, --colorWhite, --bgcolor1);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 6.0px );
-    -webkit-backdrop-filter: blur( 6.0px );
+    -webkit-backdrop-filter: blur( 6.0px );*/
+    background-color: transparent;
+    border-top: 2px solid var(--color2);
+    border-left: 2px solid var(--color2);
+    border-right: 2px solid var(--color2);
+    box-shadow: 0px 0px 20px 0px var(--color2);
 }
 
 @keyframes colorAnim {
@@ -481,9 +486,9 @@ p{
     }
 }
 @keyframes backAnim {
-    0%{background-position:50% 0%; box-shadow:0 0 30px 10px #18aeca }
-    50%{background-position:50% 100%; box-shadow: 0 0 30px 10px #2af598 ;}
-    100%{background-position:50% 0%; box-shadow:0 0 30px 10px #18aeca;}
+    0%{background-position:50% 0%; box-shadow:0 0 30px 10px var(--color1); }
+    50%{background-position:50% 100%; box-shadow: 0 0 30px 10px var(--color2);}
+    100%{background-position:50% 0%; box-shadow:0 0 30px 10px var(--color1);}
 }
 
 @media (max-aspect-ratio: 8/5) {
@@ -512,6 +517,8 @@ p{
     .mobile-nav{
         width: 100vw;
         border-radius: 0;
+        border-right: 0;
+        border-left: 0;
         .nav-text{
             font-size: 1.5vh;
         }

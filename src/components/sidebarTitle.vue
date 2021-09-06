@@ -35,7 +35,7 @@ export default{
   justify-content: center;
   align-items: center;
   font-family: "Sansation_Regular";
-  margin-top: 0.2em;
+  margin-top: 1vh;
   user-select: none;
 }
 .active{
@@ -49,12 +49,12 @@ export default{
   animation-delay: 0.3s; 
 }
 .route{
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  /*text-align: left;
-  width: 100%;*/
+  transition: all .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .route:hover{
-  text-shadow: 0px 0px 1.25rem var(--subtitleColor);
+  text-shadow: 
+    0px 0px 0.75rem var(--subtitleColor),
+    0px 0px 1.25rem var(--subtitleColor);
 }
 .fade-enter-active, .fade-leave-active {
   transition: all 0.45s cubic-bezier(1.0, 0.5, 0.8, 1.0);
@@ -87,6 +87,12 @@ export default{
 @media (max-aspect-ratio: 1/1) {
   .sidebar-title{
     width: fit-content;
+  }
+}
+
+@media (max-aspect-ratio: 5/8) {
+  .sidebar-title{
+    font-size: 3vh;
   }
 }
 </style>
