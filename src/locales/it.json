@@ -1,9 +1,43 @@
 {
   "sidebar":{
-    "profilePicText": "Yep, that's me!",
-    "frontendEngineer": "frontend engineer",
-    "whoAmI": ""
+    "profilePicText": "Sip, questo sono io!",
+    "frontendEngineer": "Svilupatore frontend",
+    "welcomeMsg1":"Benvenuti al mio sitio web!",
+    "welcomeMsg2":"Cominciamo?",
+    "sidebarTitle1": "Qui sono?",
+    "sidebarTitle1/5": "Qui sono?",
+    "sidebarTitle2": "Abilità",
+    "sidebarTitle3": "Portafoglio",
+    "sidebarTitle4": "Contatto"
   },
-  "yes-button": "Yes",
-  "no-button": "No!"
+  "about":{
+    "title1": "A proposito di me",
+    "subtitle1": "Ciao! Mi chiamo Fabio Gatti e sono un svilupatore frontend, attualmente vivo in Cali - Colombia.",
+    "introText1": "Da cuando ho scoperto il svilupo frontend sono stato affascinato! Animare ogni bottone, creare ogni componente, sceglere tutti i colori e darlo tutto per che il usuario possa ottenere la migliore esperienza, quelle son le cose che mi apassionano del mio lavoro.",
+    "introText2": "Credo firmemente che lo strumento piú valido di un svilupatore e la sua abilitá di adattarse per risolvere un problema specifico. Faccio il piu possibile per aiutare gli altri e me considero un buon giocatore di squadra. Valoro molto il mio equilibrio entre vita e lavoro!",
+    "subtitle2": "Un po' di piu personale",
+    "introText3": "Sfruto giocare videogiochi (Sempre sono stato appassionato a Dota). Disfrutto le pelicole di terrore e ogni tanto preparo dolci.",
+    "introText4": "En cuanto a sport normalmente vado in palestra e mi piace pattinare. In futuro vorrei viaggiare di piú!"
+  },
+  "skills":{
+    "title1": "Competenze",
+    "code":"Codice",
+    "design":"Disegno",
+    "language":"Lingue",
+    "language2":"Lingue"
+  },
+  "portfolio":{
+    "title1": "Portafoglio"
+  },
+  "contact":{
+    "title1":"Contatto",
+    "subtitle1":"Ti piace quello che vedi? Parliamo!",
+    "contactText1":"Attualmente mi trovo in cerca di lavoro. Principalmente cerco una ditta che da vero valori i suoi dipendenti, che abbia ambiente lavorale positivo e che possa offrire anche varie oportunitá di crescimento profesionale, sarebbe geniale che fosse con approccio remoto!",
+    "contactText2":"Si questi sono qualcuni dei valori che la tua ditta promuove allora benissimo! Puoi:",
+    "subtitle2":"Inviarmi un correo:",
+    "subtitle3":"O contattarmi per qualchiera dei seguenti:",
+    "copied":"Coapito",
+    "clickCopy":"Click per copiare",
+    "contactButton":"Contattami"
+  }
 }

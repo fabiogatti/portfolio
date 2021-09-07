@@ -1,35 +1,35 @@
 <template>
   <div class="routeContent h-full w-full flex flex-col justify-center contact">
-      <p class="contentTitle" :colortitle="color" @click="color == 3 ? color = 1 : color++">Contact</p>
-      <p class="contentSubtitle mt2">Like what you see? Let's talk!</p>
-      <p class="contentText mt2">Currently I'm the middle of a job hunt. Mainly looking for a company that really values its employees, has a positive work environment and could also offer plenty of opportunities for professional growth, would be great if it was remote focused! </p>
-      <p class="contentText mt4">If those are some of the values that your company promotes then great! You can either:</p>
+      <p class="contentTitle" :colortitle="titleColor" @click="$emit('changeTitle')">{{ $t('contact.title1') }}</p>
+      <p class="contentSubtitle mt2">{{ $t('contact.subtitle1') }}</p>
+      <p class="contentText mt2">{{ $t('contact.contactText1') }}</p>
+      <p class="contentText mt4">{{ $t('contact.contactText2') }}</p>
       <div class="flex flex-row mt4">
         <div class="flex flex-col items-center side-text">
-          <p class="contentSubtitle">Send me an email</p>
-          <button class="email-button flex flex-row items-center mt4" @click="openMail"><font-awesome-icon class="email-icon mr-2" icon="envelope"/>Contact me!</button>
+          <p class="contentSubtitle">{{ $t('contact.subtitle2') }}</p>
+          <button class="email-button flex flex-row items-center mt4" @click="openMail"><font-awesome-icon class="email-icon mr-2" icon="envelope"/>{{ $t('contact.contactButton') }}!</button>
         </div>
         <div class="divider ml2"></div>
         <div class="flex flex-col items-center side-text ml6" @mouseenter="hoverRight = true" @mouseleave="hoverRight = false">
-          <p class="contentSubtitle">Or get in touch via any of the following:</p>
+          <p class="contentSubtitle">{{ $t('contact.subtitle3') }}</p>
           <div class="flex flex-row justify-center mt4">
             <div class="icon-container" @click="handleIconClick(0)">
-              <p class="clicked-icon fade0">Copied!</p>
+              <p class="clicked-icon fade0">{{ $t('contact.copied') }}</p>
               <div class="contact-icon icon-skype">
               </div>
             </div>
             <div class="icon-container icon-margin" @click="handleIconClick(1)">
-              <p class="clicked-icon fade1">Copied!</p>
+              <p class="clicked-icon fade1">{{ $t('contact.copied') }}!</p>
               <div class="contact-icon icon-linkedin icon1">
               </div>
             </div>
             <div class="icon-container icon-margin" @click="handleIconClick(2)">
-              <p class="clicked-icon fade2">Copied!</p>
+              <p class="clicked-icon fade2">{{ $t('contact.copied') }}!</p>
               <div class="contact-icon icon-github">
               </div>
             </div>
           </div>
-          <p class="contentText fading-text mt2" :style="[ hoverRight ? {opacity:1} : {opacity:0}]">Click to copy</p>
+          <p class="contentText fading-text mt2" :style="[ hoverRight ? {opacity:1} : {opacity:0}]">{{ $t('contact.clickCopy') }}</p>
         </div>
       </div>
       
@@ -73,6 +73,7 @@ import anime from 'animejs';
 
 export default {
   name:'Contact',
+  props:['titleColor'],
   data(){
     return{
       color:1,
@@ -90,7 +91,16 @@ export default {
       document.execCommand('copy');
       document.body.removeChild(el);
 
-      anime.timeline().add({
+      anime.timeline()
+      .add({
+        targets: '.fade'+num,
+        translateY:0,
+        translateX: '-50%',
+        opacity:0,
+        easing: 'linear',
+        duration: 10
+      })
+      .add({
         targets: '.fade'+num,
         translateY: '-4vh',
         translateX: '-50%',
@@ -206,6 +216,7 @@ svg {
   font-size: 2vh;
   font-family: 'Neon';
   left:50%;
+  /*translate: -50% 0;*/
   transform: translateX(-50%);
 }
 

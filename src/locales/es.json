@@ -2,22 +2,42 @@
   "sidebar":{
     "profilePicText": "Sip, ese soy yo!",
     "frontendEngineer": "Ingeniero frontend",
-    "whoAmI": "Quien soy?"
+    "welcomeMsg1":"Bienvenido a mi sitio web!",
+    "welcomeMsg2":"Empezamos?",
+    "sidebarTitle1": "Quién soy?",
+    "sidebarTitle1/5": "Quien soy?",
+    "sidebarTitle2": "Habilidades",
+    "sidebarTitle3": "Portafolio",
+    "sidebarTitle4": "Contacto"
   },
   "about":{
-    "title": "",
-    "section1": ""
-  },
-  "education":{
-
-  },
-  "employment":{
-
+    "title1": "Sobre mi",
+    "subtitle1": "Hola! Me llamo Fabio Gatti y soy un desarrollador frontend, actualmente viviendo en Cali - Colombia.",
+    "introText1": "Desde que descubrí el desarrollo front y de interfaz de usuario he estado fascinado! Animar cada botón, crear cada componente, escoger todos los colores y darlo todo para que el usuario pueda obtener la mejor experiencia, esas son las cosas que me apasionan de mi trabajo.",
+    "introText2": "Creo firmemente que la herramienta mas valiosa de un desarrollador es su habilidad de adaptarse para resolver un problema especifico. Me gusta ayudar a los demás lo mejor que puedo y me considero un buen jugador de equipo. También valoro bastante mi balance entre vida y trabajo!",
+    "subtitle2": "Algo un poco más personal",
+    "introText3": "Me encanta jugar videojuegos (siempre he sido un gran aficionado a Dota). Disfruto las peliculas de terror y de vez en cuando preparo postres.",
+    "introText4": "En cuanto a los deportes usualmente gasto un poco de tiempo en el gimnasio y me gusta salir a patinar. Además espero viajar bastante en un futuro cercano!"
   },
   "skills":{
-
+    "title1": "Habilidades",
+    "code":"Código",
+    "design":"Diseño",
+    "language":"Lenguaje",
+    "language2":"Leng"
   },
   "portfolio":{
-
+    "title1": "Portafolio"
+  },
+  "contact":{
+    "title1":"Contacto",
+    "subtitle1":"Te gusta lo que ves? Hablemos!",
+    "contactText1":"Actualmente me encuentro en medio de mi búsqueda laboral. Principalmente busco una compañia que valore realmente a sus empleados, que tenga un ambiente laboral positivo y que también pueda ofrecer oportunidades de crecimiento profesional, sería genial que también fuera con enfoque remoto!",
+    "contactText2":"Si esos son algunos de los valores que tu compañia promueve entonces genial! Puedes:",
+    "subtitle2":"Enviarme un correo:",
+    "subtitle3":"O contactarme por cualquiera de los siguientes:",
+    "copied":"Copiado",
+    "clickCopy":"Click para copiar",
+    "contactButton":"Contáctame"
   }
 }

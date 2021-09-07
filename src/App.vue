@@ -9,14 +9,14 @@
       </transition>
     </div>-->
     <transition :name="firstSelected && windowSize == 2 ? 'fadeContentSlow' : 'fadeContentNormal'">
-      <router-view v-if="!full" class="router" :full="firstSelected" :style="[{position:routerPos}]" :windowSize='windowSize'/>
+      <router-view v-if="!full" class="router" :full="firstSelected" :style="[{position:routerPos}]" :windowSize='windowSize' :titleColor='titleColor' @changeTitle="titleColor == 3 ? titleColor = 1 : titleColor++"/>
     </transition>
     <language-controller :full="full" :windowSize='windowSize'/>
   </div>
 </template>
 
 <script>
-//  import anime from 'animejs';
+//import anime from 'animejs';
 import Sidebar from './components/sidebar.vue'
 import LanguageController from './components/languageController.vue'
 
@@ -32,7 +32,8 @@ export default {
       activeElem: 0,
       firstSelected:false,
       windowSize: 2,
-      routerPos: 'relative'
+      routerPos: 'relative',
+      titleColor:1
     }
   },
   methods:{
@@ -318,6 +319,10 @@ html,.router,.routeContent{
     overflow-y: hidden;
 }
 
+html{
+  position: fixed;
+}
+
 a,button,div{
   -webkit-tap-highlight-color: transparent;
 }
@@ -382,7 +387,7 @@ a,button,div{
 
 @media (max-aspect-ratio: 1/1){
   .routeContent{
-    padding: 2vh 2vw 2vh 2vw;
+    padding: 2vh 3vw 2vh 3vw;
   }
   .router{
     padding-bottom: 10vh;
@@ -394,10 +399,10 @@ a,button,div{
     font-size: 4vh;
   }
   .contentSubtitle{
-    font-size: 2.25vh;
+    font-size: 2.2vh;
   }
   .contentText{
-    font-size: 1.8vh;
+    font-size: 1.75vh;
   }
 }
 

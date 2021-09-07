@@ -2,7 +2,7 @@
     <div class="navbar">
         <div class="main-side">
             <div class="sidebar" :class="[ full ? '' : 'normal-sidebar' ]">
-                <div class="top-sidebar anim-end" :class="[ fullScreen ? 'scale-top' : '' ]">
+                <div class="top-sidebar flex flex-col anim-end" :class="[ fullScreen ? 'full-top':'' ]" :style="[fullScreen && windowSize>0 ? {transform:'scale(1.4)'} : {transform:'scale(1.15)'}]">
                     <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
                         <img class='profile-pic' src="../assets/img/profile.png" alt="">
                         <p>{{ $t('sidebar.profilePicText') }}</p>
@@ -29,7 +29,7 @@
             </transition>
             
         </div>
-        <div class="mobile-nav flex flex-row items-center justify-around" style="opacity:0">
+        <div class="mobile-nav color2 flex flex-row items-center justify-around" style="opacity:0">
             <div v-for="item in sidebarMenu" :key="item.id+'nav'">
                 <mobileNavItem :item="item" :active="active" @clicked="handleLinkClicked(item.id)"></mobileNavItem>
             </div>
@@ -53,10 +53,10 @@ export default {
     data(){
         return{
             sidebarMenu:[ 
-                { id:1, text:this.$t('sidebar.sidebarTitle1'), to:"/", icon:'user', mobileText:this.$t('sidebar.sidebarTitle1/5') },
-                { id:2, text:this.$t('sidebar.sidebarTitle2'), to:"/skills", icon:'cogs', mobileText:this.$t('sidebar.sidebarTitle2') },
-                { id:3, text:this.$t('sidebar.sidebarTitle3'), to:"/portfolio", icon:'briefcase', mobileText:this.$t('sidebar.sidebarTitle3') },
-                { id:4, text:this.$t('sidebar.sidebarTitle4'), to:"/contact", icon:'phone', mobileText:this.$t('sidebar.sidebarTitle4') },
+                { id:1, text:'sidebar.sidebarTitle1', to:"/", icon:'user', mobileText:'sidebar.sidebarTitle1/5' },
+                { id:2, text:'sidebar.sidebarTitle2', to:"/skills", icon:'cogs', mobileText:'sidebar.sidebarTitle2' },
+                { id:3, text:'sidebar.sidebarTitle3', to:"/portfolio", icon:'briefcase', mobileText:'sidebar.sidebarTitle3' },
+                { id:4, text:'sidebar.sidebarTitle4', to:"/contact", icon:'phone', mobileText:'sidebar.sidebarTitle4' },
             ],
             active:0,
             fullScreen:true
@@ -72,7 +72,15 @@ export default {
                             translateY: -50,
                             opacity: 0,
                             duration: 600,
-                            easing: 'easeOutExpo',
+                            easing: 'easeOutExpo'
+                        })
+                        .add({
+                            targets: '.top-sidebar',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 10,
+                            scale:1,
+                            easing: 'easeOutExpo'
                         })
                         .add({
                             targets: '.welcome-msg',
@@ -136,6 +144,14 @@ export default {
                             opacity: 0,
                             duration: 600,
                             easing: 'easeOutExpo',
+                        })
+                        .add({
+                            targets: '.top-sidebar',
+                            translateY: -50,
+                            opacity: 0,
+                            duration: 10,
+                            scale:1,
+                            easing: 'easeOutExpo'
                         })
                         .add({
                             targets: '.welcome-msg',
@@ -204,6 +220,12 @@ export default {
     },
     mounted(){
         setTimeout(() => {
+            this.sidebarMenu = [ 
+                { id:1, text:'sidebar.sidebarTitle1', to:"/", icon:'user', mobileText:'sidebar.sidebarTitle1/5' },
+                { id:2, text:'sidebar.sidebarTitle2', to:"/skills", icon:'cogs', mobileText:'sidebar.sidebarTitle2' },
+                { id:3, text:'sidebar.sidebarTitle3', to:"/portfolio", icon:'briefcase', mobileText:'sidebar.sidebarTitle3' },
+                { id:4, text:'sidebar.sidebarTitle4', to:"/contact", icon:'phone', mobileText:'sidebar.sidebarTitle4' },
+            ];
             anime.timeline()
             .add({
                 targets: '.sidebar',
@@ -318,6 +340,8 @@ export default {
     justify-content: start;
     z-index: 20;
     transition: width 1s ease-in-out;
+    justify-content: space-around;
+    padding: 10vh 0;
 }
 .normal-sidebar{
     width: 20vw;
@@ -326,14 +350,14 @@ p{
     font-family: 'Roboto-ondensed', sans-serif;
 }
 .top-sidebar{
-    height: 50%;
+    justify-content: end;
+    align-items: center;
+    padding-bottom: 6vh;
 }
-.scale-top{
-    margin-top: 4vh;
-    transform: scale(1.4);
+.full-top{
+    padding-top: 10vh;
 }
 .profile-div{
-    margin-top: 10vh;
     border-radius: 50%;
     height: 17vh;
     position: relative;
@@ -380,10 +404,6 @@ p{
     color: var(--color);
     margin-top: 0.5em;
     font-weight: 100;
-    /*animation-name:opacityAnim, nameAnim;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    */
     animation: opacityAnim 10s infinite, nameAnim 5s infinite;
     animation-delay: 0.3s;
 }
@@ -392,15 +412,11 @@ p{
     font-size: 2.5vh;
     color: var(--subtitleColor);
     margin-top: 0.25em;
-    /*font-weight: 400;
-    animation: colorAnim 5s infinite;
-    animation-delay: 0.3s;*/
 }
 .welcome-msg{
     display: flex;
     flex-direction: column;
     color: var(--grey1);
-    margin-bottom: 10vh;
 }
 .welcome-msg p{
     transition: all 0.3s ease-in-out;
@@ -427,6 +443,7 @@ p{
 .bottom-normal{
     display: flex;
     flex-direction: column;
+    margin-bottom: 7.5vh;
 }
 .line{
     width: 5px;
@@ -456,7 +473,19 @@ p{
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 6.0px );
     -webkit-backdrop-filter: blur( 6.0px );*/
+    
+}
+
+.color1{
     background-color: transparent;
+    border-top: 2px solid var(--color2);
+    border-left: 2px solid var(--color2);
+    border-right: 2px solid var(--color2);
+    box-shadow: 0px 0px 20px 0px var(--color2);
+}
+
+.color2{
+    background-color: var(--bgcolor2);
     border-top: 2px solid var(--color2);
     border-left: 2px solid var(--color2);
     border-right: 2px solid var(--color2);
@@ -498,17 +527,9 @@ p{
 }
 
 @media (max-aspect-ratio: 1/1) {
-    .scale-top{
-        transform:scale(1.15);
-        .profile-div{
-            margin-top: 5vh;
-        }
-    }
-    .top-sidebar{
-        height: 35vh;
-    }
     .welcome-msg{
-        margin-bottom: 1vh;
+        margin-top: 3vh;
+        margin-bottom: 4vh;
         height: 20vh;
     }
     .normal-sidebar{
@@ -528,6 +549,13 @@ p{
     }
     .bottom-sidebar{
         align-items: center;
+    }
+}
+
+@media (max-height: 500px) {
+    .welcome-msg,.sidebar{
+        margin:0;
+        padding:0;
     }
 }
 

@@ -4,7 +4,6 @@ import about from './views/about.vue'
 import contact from './views/contact.vue'
 import skills from './views/skills.vue'
 import portfolio from './views/portfolio.vue'
-import notFound from './views/notFound.vue'
 
 Vue.use(Router)
 
@@ -30,11 +29,6 @@ export default new Router({
             path: '/contact',
             name: 'contact',
             component: contact
-        },
-        {
-            path: '*',
-            name: 'notFound',
-            component: notFound
         }
     ]
 })

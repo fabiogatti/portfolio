@@ -84,9 +84,9 @@ export default {
   },
   mounted(){
     setTimeout(() => {
-      var iniTranslateY = 20
+      var iniTranslateY = '3vh'
       if(this.windowSize == 0){
-        iniTranslateY = -20
+        iniTranslateY = '-3vh'
       }
       anime.timeline()
         .add({
