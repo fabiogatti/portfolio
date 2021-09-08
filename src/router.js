@@ -8,25 +8,25 @@ import portfolio from './views/portfolio.vue'
 Vue.use(Router)
 
 export default new Router({
-    mode: 'history',
+    mode: 'hash',
     routes: [
         {
-            path: '/portfolio',
+            path: '/',
             name: 'about',
             component: about
         },
         {
-            path: '/portfolio/skills',
+            path: '/skills',
             name: 'skills',
             component: skills
         },
         {
-            path: '/portfolio/projects',
+            path: '/projects',
             name: 'portfolio',
             component: portfolio
         },
         {
-            path: '/portfolio/contact',
+            path: '/contact',
             name: 'contact',
             component: contact
         }

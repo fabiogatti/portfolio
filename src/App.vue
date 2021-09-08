@@ -56,8 +56,8 @@ export default {
   },
   created(){
     /*var router = window.location.pathname.split('/')[window.location.pathname.split('/').length-1];*/
-    if(this.$router.currentRoute.path != '/portfolio')
-      this.$router.push({ path: '/portfolio' })
+    if(this.$router.currentRoute.path != '/')
+      this.$router.push({ path: '/' })
     //this.full = router.length > 0 ? false : true;
   },
   mounted(){
