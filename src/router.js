@@ -11,7 +11,7 @@ export default new Router({
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '/portfolio',
             name: 'about',
             component: about
         },
@@ -21,7 +21,7 @@ export default new Router({
             component: skills
         },
         {
-            path: '/portfolio',
+            path: '/projects',
             name: 'portfolio',
             component: portfolio
         },
