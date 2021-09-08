@@ -52,12 +52,7 @@ export default {
     },
     data(){
         return{
-            sidebarMenu:[ 
-                { id:1, text:'sidebar.sidebarTitle1', to:"/", icon:'user', mobileText:'sidebar.sidebarTitle1/5' },
-                { id:2, text:'sidebar.sidebarTitle2', to:"/skills", icon:'cogs', mobileText:'sidebar.sidebarTitle2' },
-                { id:3, text:'sidebar.sidebarTitle3', to:"/portfolio", icon:'briefcase', mobileText:'sidebar.sidebarTitle3' },
-                { id:4, text:'sidebar.sidebarTitle4', to:"/contact", icon:'phone', mobileText:'sidebar.sidebarTitle4' },
-            ],
+            sidebarMenu:[],
             active:0,
             fullScreen:true
         }
@@ -222,9 +217,9 @@ export default {
         setTimeout(() => {
             this.sidebarMenu = [ 
                 { id:1, text:'sidebar.sidebarTitle1', to:"/portfolio", icon:'user', mobileText:'sidebar.sidebarTitle1/5' },
-                { id:2, text:'sidebar.sidebarTitle2', to:"/skills", icon:'cogs', mobileText:'sidebar.sidebarTitle2' },
-                { id:3, text:'sidebar.sidebarTitle3', to:"/projects", icon:'briefcase', mobileText:'sidebar.sidebarTitle3' },
-                { id:4, text:'sidebar.sidebarTitle4', to:"/contact", icon:'phone', mobileText:'sidebar.sidebarTitle4' },
+                { id:2, text:'sidebar.sidebarTitle2', to:"/portfolio/skills", icon:'cogs', mobileText:'sidebar.sidebarTitle2' },
+                { id:3, text:'sidebar.sidebarTitle3', to:"/portfolio/projects", icon:'briefcase', mobileText:'sidebar.sidebarTitle3' },
+                { id:4, text:'sidebar.sidebarTitle4', to:"/portfolio/contact", icon:'phone', mobileText:'sidebar.sidebarTitle4' },
             ];
             anime.timeline()
             .add({
