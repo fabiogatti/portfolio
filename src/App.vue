@@ -62,11 +62,8 @@ export default {
   },
   mounted(){
     this.windowSize = this.changeWindowSize();
-    console.log(this.windowSize);
     window.addEventListener('resize',()=>{
       this.windowSize = this.changeWindowSize();
-      console.log(this.windowSize);
-      
     });
     setTimeout(() => {
       /*anime({

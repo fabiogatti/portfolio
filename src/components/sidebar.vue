@@ -4,7 +4,8 @@
             <div class="sidebar" :class="[ full ? '' : 'normal-sidebar' ]">
                 <div class="top-sidebar flex flex-col anim-end" :class="[ fullScreen ? 'full-top':'' ]" :style="[fullScreen && windowSize>0 ? {transform:'scale(1.4)'} : {transform:'scale(1.15)'}]">
                     <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
-                        <img class='profile-pic' src="../assets/img/profile.png" alt="">
+                        <!--<img class='profile-pic' src="../assets/img/profile.jpg" alt="">-->
+                        <div class='profile-pic'></div>
                         <p>{{ $t('sidebar.profilePicText') }}</p>
                     </div>
                     <div class="description-div">
@@ -201,7 +202,6 @@ export default {
                         })
                 }
             }
-            console.log('clicked!');
             this.active = id;
         }
     },
@@ -252,7 +252,6 @@ export default {
                         duration: 1000,
                         easing: 'easeOutExpo',
                         complete: function() {
-                            console.log('done');
                             document.querySelector('.mobile-nav').style.display = 'none';
                         },
                     })
@@ -378,9 +377,13 @@ p{
 }
 .profile-pic{
     height: 15vh;
+    width: 15vh;
     border-radius: 50%;
     box-shadow: 0 0 1rem var(--color);
     transition: 0.35s opacity;
+    background-image: url("../assets/img/profile.jpg");
+    background-size: 100%;
+    box-shadow: 0 0 1vh 0.3vh var(--bgcolor2) inset;
 }
 .profile-div:hover .profile-pic{
     opacity: 0.3;
