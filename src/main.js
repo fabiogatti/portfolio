@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { router } from './router.js'
-import './index.css'
 //import i18n from './i18n'
 import { translateObj } from './i18n.js'
 import { createI18n } from 'vue-i18n'

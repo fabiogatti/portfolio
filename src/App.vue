@@ -94,6 +94,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('./index.css');
+
 @font-face {
   font-family: "Neon";
   src: local("Neon"),  url(./fonts/Neon.ttf) format("truetype");
