@@ -3,11 +3,11 @@
         <div class="container p-4 flex flex-col items-center justify-around">
             <img class="preview !max-h-[35vh]" :src='getImageUrl(title)' :alt="`${title} project image`">
             <div class="w-full flex flex-row justify-between items-center mt-2 mb-1">
-                <p class="title px-2 py-2 font-sansation text-[4.5vh]">{{ title }}</p>
+                <p class="title md:px-2 py-2 font-sansation text-[3vh] md:text-[4.5vh]">{{ title }}</p>
                 <slot></slot>
             </div>
             
-            <p class="font-neon px-2 pb-2 text-justify max-h-48 overflow-auto text-[1.8vh]">{{ $t(`portfolio.${title.toLowerCase()}`) }}</p>
+            <p class="font-neon md:px-2 pb-2 text-justify max-h-48 overflow-auto text-[1.8vh]">{{ $t(`portfolio.${title.toLowerCase()}`) }}</p>
         </div>
     </a>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <div class="lang flex flex-col">
-    <div class="lang-list" :style="[ windowSize == 0 ? {order:2} : '']">
+  <div class="lang flex" :class="[ windowSize == 0 ? 'flex-row' : 'flex-col' ]">
+    <div class="lang-list flex" :class="[ windowSize == 0 ? 'flex-row' : 'flex-col' ]">
       <button class="lang-opt" @click="setLanguage('en')" :class="[ activeLang == 'en' ? 'activeColor' : '']">EN</button>
       <button class="lang-opt" @click="setLanguage('it')" :class="[ activeLang == 'it' ? 'activeColor' : '']">IT</button>
       <button class="lang-opt" @click="setLanguage('es')" :class="[ activeLang == 'es' ? 'activeColor' : '']">ES</button>
@@ -33,9 +33,13 @@ export default {
     toggleButtons(){
       var translateY1 = 0;
       var translateY2 = '3vh';
+      var translateX1 = 0;
+      var translateX2 = 0;
       if(this.windowSize == 0){
-        translateY1 = '1vh';
-        translateY2 = '-3vh';
+        translateY1 = 0;
+        translateY2 = 0;
+        translateX1 = 0;
+        translateX2 = '-3vh';
       }
 
       if(this.active){
@@ -43,6 +47,7 @@ export default {
           .add({
               targets: '.lang-list',
               translateY: translateY2,
+              translateX: translateX2,
               opacity: 0,
               duration: 350,
               easing: 'linear',
@@ -63,6 +68,7 @@ export default {
         .add({
           targets: '.lang-list',
           translateY: translateY1,
+          translateX: translateX1,
           opacity: 1,
           duration: 350,
           delay: 50,
@@ -157,12 +163,10 @@ button:focus {
 }
 .lang-list{
   opacity: hidden;
-  display: flex;
-  flex-direction: column;
   display: none;
 }
 .lang-opt{
-  padding: 0.2em 0 0.2em 0;
+  padding: 0.2em 0.8em;
   transition: all .2s ease-in;
   font-size: 2vh;
   color: var(--langColor2);

@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <div class="main-side">
-            <div class="sidebar" :class="[ full ? '' : 'normal-sidebar' ]">
+            <div class="sidebar" :class="[ full ? 'pb-[10vh]' : 'normal-sidebar py-[10vh]' ]">
                 <div class="top-sidebar flex flex-col anim-end" :class="[ fullScreen ? 'full-top':'' ]" :style="[fullScreen && windowSize>0 ? {transform:'scale(1.4)'} : {transform:'scale(1.15)'}]">
                     <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
                         <!--<img class='profile-pic' src="../assets/img/profile.jpg" alt="">-->
@@ -76,7 +76,7 @@ export default {
                             translateY: -50,
                             opacity: 0,
                             duration: 10,
-                            scale:1,
+                            scale:1.15,
                             easing: 'easeOutExpo'
                         })
                         .add({
@@ -147,7 +147,7 @@ export default {
                             translateY: -50,
                             opacity: 0,
                             duration: 10,
-                            scale:1,
+                            scale:1.15,
                             easing: 'easeOutExpo'
                         })
                         .add({
@@ -338,7 +338,6 @@ export default {
     z-index: 20;
     transition: width 1s ease-in-out;
     justify-content: space-around;
-    padding: 10vh 0;
 }
 .normal-sidebar{
     width: 20vw;

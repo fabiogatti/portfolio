@@ -1,7 +1,7 @@
 <template>
   <div class="routeContent h-full w-full flex flex-col justify-center">
     <p class="contentTitle z-20" :colortitle="titleColor" @click="$emit('changeTitle')">{{ $t('portfolio.title1') }}</p>
-    <div class="relative h-full flex flex-row items-center justify-around">
+    <div class="relative h-full flex flex-row items-center justify-around space-x-8">
       <projectCard :title="'Pokedex'" color="1">
         <template v-slot:default>
           <img class="w-[5.5vh] h-max p-1" :src="getImg('vue')" alt="Vue logo">

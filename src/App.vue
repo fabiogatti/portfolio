@@ -270,8 +270,16 @@ body{
 
 
 .routeContent{
-  width: 80vw;
+  width: 100vw;
   padding: 2.5vh 10vw 2.5vh 5vw;
+}
+
+.routeContent[windowSize="1"]{
+  width: 100vw;
+}
+
+.routeContent[windowSize="2"]{
+  width: 100vw;
 }
 
 .mt1{
