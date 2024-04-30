@@ -91,7 +91,7 @@ export default {
   props:["full","windowSize","titleColor"],
   data(){
     return{
-      delay:2000,
+      delay:2500,
       color:1,
       hoverActive: false,
       skillDataCode:[

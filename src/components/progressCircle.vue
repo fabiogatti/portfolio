@@ -2,9 +2,9 @@
   <div class="progress-circle mx-9" :key="counter" :class="active ? 'active' : ''" @mouseenter="$emit('hover',true)" @mouseleave="$emit('hover',false)"> 
     <div :color="color" class="circle-gradient w-full h-full flex justify-center items-center">
       <div class="loader" :style="loaderStyle"></div>
-      <div class="glow" :style="glowStyle"></div>
+      <div class="glow opacity-0" :style="[glowStyle,textOpac]"></div>
       <svg viewBox="0 0 100 100" class="anim" ref="svgCircle">
-        <!--<circle r="45" cx="50" cy="50" class="pie" :style="animStyle"/>-->
+        <circle r="45" cx="50" cy="50" class="pie" :style="animStyle"/>
 
       </svg>
       <div class="flex flex-col justify-center items-center">
@@ -104,7 +104,7 @@ export default {
   },
   mounted(){
     setTimeout(() => {
-      this.animStyle = "strokeDasharray:0 500";
+      this.animStyle = "stroke-dashoffset:500";
       this.textOpac = "opacity:1";
     }, this.delay);
     window.addEventListener('resize',()=>{ 
@@ -155,11 +155,11 @@ export default {
   height: 105%;
   width: 105%;
   margin: 0 auto;
-  transform: rotate(-90deg);
+  transform: rotate(-100deg);
   border-radius: 50%;
   background-color: transparent;
   position: absolute;
-  left: 15vh;
+  z-index: 0;
 }
 .anim circle {
   width: 100%;
@@ -168,9 +168,9 @@ export default {
   stroke: var(--bgcolor1);
   stroke-width: 12vh;
   stroke-dasharray: 500;
-  stroke-dashoffset: -1000; 
+  stroke-dashoffset: 1000; 
   /*transition: stroke-dasharray 1.5s ease;*/
-  transition: stroke-dasharray 5.5s ease;
+  transition: stroke-dashoffset 3.5s ease;
   scale: 1.1;
 }
 
@@ -303,7 +303,8 @@ export default {
   right: 0px;
   z-index: -10;
   filter: blur(25px);
-  opacity: 70%;
+  transition: opacity 2s;
+  transition-delay: 0.5s;
 }
 </style>
 
