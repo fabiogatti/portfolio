@@ -16,8 +16,8 @@
     "introText1": "Ever since I discovered frontend and UI development I've been in love with it! Animating each button, creating each component, choosing every color and giving all i have so the user can get the best experience, those are the things I enjoy the most about my work.",
     "introText2": "I believe that the most valuable tool for a developer is its ability to adapt to solve a specific problem. I like to help others as best as i can and consider myself a very good teamplayer. I also value my life-work balance a lot!",
     "subtitle2": "Something a bit more personal",
-    "introText3": "I love playing videogames (always been a fan of Dota). Avid enjoyer of terror movies and cooking desserts.",
-    "introText4": "As for sports i usually waste some time at the gym and like to go rollerblading from time to time. Also looking forward to travel a lot in the near future!"
+    "introText3": "I love playing videogames and watch anime. Avid enjoyer of terror movies and photography!",
+    "introText4": "As for sports i usually waste some time at the gym and like to go rollerblading from time to time."
   },
   "skills":{
     "title1": "Skills",
@@ -27,7 +27,9 @@
     "language2":"Lang"
   },
   "portfolio":{
-    "title1": "Portfolio"
+    "title1": "Portfolio",
+    "pokedex": "This project was made to display the first 151 pokemon in a comprehensive way with their own stats and description. It allows the user to navigate a pokedex like a real version!",
+    "stratos": "For this one I wanted a different looking dashboard (Made with some glassmorphism) to display the weather data of any part of the world, given a latitude and a longitude"
   },
   "contact":{
     "title1":"Contact",

@@ -16,8 +16,8 @@
     "introText1": "Desde que descubrí el desarrollo front y de interfaz de usuario he estado fascinado! Animar cada botón, crear cada componente, escoger todos los colores y darlo todo para que el usuario pueda obtener la mejor experiencia, esas son las cosas que me apasionan de mi trabajo.",
     "introText2": "Creo firmemente que la herramienta mas valiosa de un desarrollador es su habilidad de adaptarse para resolver un problema especifico. Me gusta ayudar a los demás lo mejor que puedo y me considero un buen jugador de equipo. También valoro bastante mi balance entre vida y trabajo!",
     "subtitle2": "Algo un poco más personal",
-    "introText3": "Me encanta jugar videojuegos (siempre he sido un gran aficionado a Dota). Disfruto las peliculas de terror y de vez en cuando preparo postres.",
-    "introText4": "En cuanto a los deportes usualmente gasto un poco de tiempo en el gimnasio y me gusta salir a patinar. Además espero viajar bastante en un futuro cercano!"
+    "introText3": "Me encanta jugar videojuegos y ver anime. Disfruto las peliculas de terror y la fotografía!",
+    "introText4": "En cuanto a los deportes usualmente gasto un poco de tiempo en el gimnasio y me gusta salir a patinar."
   },
   "skills":{
     "title1": "Habilidades",
@@ -27,7 +27,9 @@
     "language2":"Leng"
   },
   "portfolio":{
-    "title1": "Portafolio"
+    "title1": "Portafolio",
+    "pokedex": "Este proyecto lo realice para mostrar los primeros 151 pokemon de una manera comprensiva con sus estadisticas y descripciones. Permite al usuario navegar como si estuviera usando un pokedex real!",
+    "stratos": "Para este queria un dashboard que luciera diferente (Lo hice utilizando vidrio morfismo) para mostrar los datos meterológicos de cualquier parte del mundo, dadas la latitud y longitud"
   },
   "contact":{
     "title1":"Contacto",

@@ -1,4 +1,4 @@
-import Vue from 'vue'
+/*import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
 Vue.use(VueI18n)
@@ -21,3 +21,18 @@ export default new VueI18n({
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
   messages: loadLocaleMessages()
 })
+*/
+
+import en from "./locales/en.json" with { type: "json" }
+import es from "./locales/es.json" with { type: "json" }
+import it from "./locales/it.json" with { type: "json" }
+
+export const translateObj = {
+  locale: 'en',
+  fallbackLocale: 'es',
+  messages: {
+    en,
+    es,
+    it
+  }
+}

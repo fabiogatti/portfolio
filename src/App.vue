@@ -9,7 +9,7 @@
       </transition>
     </div>-->
     <transition :name="firstSelected && windowSize == 2 ? 'fadeContentSlow' : 'fadeContentNormal'">
-      <router-view v-if="!full" class="router" :full="firstSelected" :style="[{position:routerPos}]" :windowSize='windowSize' :titleColor='titleColor' @changeTitle="titleColor == 3 ? titleColor = 1 : titleColor++"/>
+      <router-view v-if="!full" class="router" :key="$route.fullPath" :full="firstSelected" :style="[{position:routerPos}]" :windowSize='windowSize' :titleColor='titleColor' @changeTitle="titleColor == 3 ? titleColor = 1 : titleColor++"/>
     </transition>
     <language-controller :full="full" :windowSize='windowSize'/>
   </div>
@@ -127,7 +127,10 @@ export default {
   src: local("Sansation_Regular"),  url(./fonts/Sansation_Regular.ttf) format("truetype");
 }
 
-
+a{
+  color: unset;
+  text-decoration: none;
+}
 .font-neon{
   font-family: "Neon";
 }
@@ -166,6 +169,7 @@ body{
   --color1: #18aeca;
   --color2: #2af598;
   --grey1: #acacac;
+  --grey2: #e0e0e0;
   --neonPurple1:#B026FF;
   
   background-color: var(--bgcolor1);
@@ -200,35 +204,27 @@ body{
 }
 
 
-.fadeContentSlow-enter-active  {
+.fadeContentSlow-enter-active{
   transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   transition-delay: 1.5s;
-}
-.fadeContentSlow-leave-active{
-  transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.fadeContentSlow-enter {
   transform: translateY(-30px);
   opacity: 0;
 }
-.fadeContentSlow-leave-to {
+.fadeContentSlow-leave-active{
+  transition: all 0.75s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   transform: translateY(50px);
   opacity: 0;
 }
 
 
-.fadeContentNormal-enter-active  {
-  transition: all 0.55s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  transition-delay: 0.65s;
-}
-.fadeContentNormal-leave-active{
-  transition: all 0.55s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.fadeContentNormal-enter {
+.fadeContentNormal-enter-active{
+  transition: all 0.55s ease-in;
+  transition-delay: 0.15s;
   transform: translateY(-30px);
   opacity: 0;
 }
-.fadeContentNormal-leave-to {
+.fadeContentNormal-leave-active{
+  transition: all 0.55s ease-out;
   transform: translateY(50px);
   opacity: 0;
 }
@@ -291,6 +287,9 @@ body{
 .mt6{
   margin-top: 6vh;
 }
+.mt7{
+  margin-top: 7vh;
+}
 
 .ml1{
   margin-left: 1vw;
@@ -328,13 +327,13 @@ a,button,div{
   from {
     color: var(--neonPink1);
     text-shadow:0 0 5px var(--neonPink1),
-                0 0 20px var(--neonPink1);
+                0 0 10px var(--neonPink1);
   }
   to {
     color: var(--neonPink2);
     text-shadow:
       0 0 5px var(--neonPink2),
-      0 0 15px var(--neonPink2),
+      0 0 25px var(--neonPink2),
       0 0 35px var(--neonPink2);
   }
 }

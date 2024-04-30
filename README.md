@@ -11,7 +11,7 @@ I tried my best to make them all look good in any device and with most resolutio
 
 There are a couple of components that got hover interactions in the page that you can miss if you dont search for them. You can also click the title of the sections to change the color of it if you dont like it!
 
-That pretty much sums it, i will revisit the project in the future to change some stuff related to the background and mainly to add the portfolio once i got enough decent organized projects done.
+That pretty much sums it, i will revisit the project in the future to change some stuff related to the background and add more projects to my porftolio page.
 
 Have fun and hope you like it!
 

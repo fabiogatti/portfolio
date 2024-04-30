@@ -3,29 +3,41 @@
     <transition name="fadeContentNormal">
     
     <div class="skills-content flex flex-col absolute" v-show="windowSize==2">
-      <p class="contentTitle" :colortitle="titleColor" @click="$emit('changeTitle')">{{ $t('skills.title1') }}</p>
+      <p class="contentTitle mb-6" :colortitle="titleColor" @click="$emit('changeTitle')">{{ $t('skills.title1') }}</p>
       <div class="flex flex-row items-center">
         <hoverTwoTexts class="skill-hover" :trans="2">
-          <font-awesome-icon slot="main" class="skill-icon" icon="code"/>
-          <p slot="second" class="skill-subtitle">{{ $t('skills.code') }}</p>
+          <template v-slot:main>
+            <font-awesome-icon class="skill-icon" icon="code"/>
+          </template>
+          <template v-slot:second>
+            <p slot="second" class="skill-subtitle">{{ $t('skills.code') }}</p>
+          </template>
         </hoverTwoTexts>
         <div v-for="skill in skillDataCode" :key="skill.text">
           <progressCircle @hover="handleHover" :color="1" :percentage="skill.percentage" :text="skill.text" :fSize="1" :delay="delay" :active="hoverActive"/>
         </div>
       </div>
-      <div class="flex flex-row mt6 items-center">
+      <div class="flex flex-row mt7 items-center">
         <hoverTwoTexts class="skill-hover" :trans="2">
-          <font-awesome-icon slot="main" class="skill-icon" icon="paint-brush"/>
-          <p slot="second" class="skill-subtitle">{{ $t('skills.design') }}</p>
+          <template v-slot:main>
+            <font-awesome-icon class="skill-icon" icon="paint-brush"/>
+          </template>
+          <template v-slot:second>
+            <p slot="second" class="skill-subtitle">{{ $t('skills.design') }}</p>
+          </template>
         </hoverTwoTexts>
          <div v-for="skill in skillDataDesign" :key="skill.text">
           <progressCircle @hover="handleHover" :color="0" :percentage="skill.percentage" :text="skill.text" :fSize="0" :delay="delay" :active="hoverActive"/>
         </div>
       </div>
-      <div class="flex flex-row mt6 items-center">
+      <div class="flex flex-row mt7 items-center">
         <hoverTwoTexts class="skill-hover" :trans="2">
-          <font-awesome-icon slot="main" class="skill-icon" icon="language"/>
-          <p slot="second" class="skill-subtitle">{{ $t('skills.language') }}</p>
+          <template v-slot:main>
+            <font-awesome-icon class="skill-icon" icon="language"/>
+          </template>
+          <template v-slot:second>
+            <p slot="second" class="skill-subtitle">{{ $t('skills.language') }}</p>
+          </template>
         </hoverTwoTexts>
         <div v-for="skill in skillDataLang" :key="skill.text">
           <progressCircle @hover="handleHover" :color="2" :percentage="skill.percentage" :text="skill.text" :fSize="2" :delay="delay" :active="hoverActive"/>
@@ -83,23 +95,22 @@ export default {
       color:1,
       hoverActive: false,
       skillDataCode:[
-        { text:'JS/TS', percentage:60 },
-        { text:'HTML', percentage:65 },
-        { text:'CSS', percentage:70 },
-        { text:'Vue', percentage:65 },
-        { text:'Git', percentage:45 },
-        { text:'Rest', percentage:65 },
+        { text:'Vue', percentage:75 },
+        { text:'HTML/CSS', percentage:75 },
+        { text:'JS/TS', percentage:70 },
+        { text:'Git', percentage:60 },
+        { text:'Web3', percentage:35 },
       ],
       skillDataDesign:[
+        { text:'Figma', percentage:60 },
+        { text:'AdobeAi', percentage:40 },
+        { text:'AdobePS', percentage:35 },
         { text:'AdobeXD', percentage:30 },
-        { text:'AdobeAi', percentage:35 },
-        { text:'AdobePS', percentage:30 },
-        { text:'Figma', percentage:45 }
       ],
       skillDataLang:[
         { text:'ES', percentage:95 },
-        { text:'EN', percentage:75 },
-        { text:'IT', percentage:35 },
+        { text:'EN', percentage:80 },
+        { text:'IT', percentage:50 },
       ]
     }
   },

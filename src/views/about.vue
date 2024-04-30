@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-col justify-center routeContent about">
-    <h1 class="contentTitle" :colortitle="titleColor" @click="$emit('changeTitle')">{{ $t('about.title1') }}</h1>
+    <p class="contentTitle" :colortitle="titleColor" @click="$emit('changeTitle')">{{ $t('about.title1') }}</p>
     <div class="mt2">
       <h3 class="contentSubtitle">{{ $t('about.subtitle1') }}</h3>
       <div class="flex flex-row">

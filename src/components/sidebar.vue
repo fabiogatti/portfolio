@@ -6,6 +6,7 @@
                     <div class="profile-div" :class="[ fullScreen ? '' : '' ]">
                         <!--<img class='profile-pic' src="../assets/img/profile.jpg" alt="">-->
                         <div class='profile-pic'></div>
+                        <div class='profile-glow'></div>
                         <p>{{ $t('sidebar.profilePicText') }}</p>
                     </div>
                     <div class="description-div">
@@ -258,6 +259,7 @@ export default {
                     anime.timeline()
                         .add({
                             targets: '.sidebar',
+                            translateX: '0px',
                             width: '20vw',
                             opacity: 1,
                             duration: 400,
@@ -300,6 +302,7 @@ export default {
                         .add({
                             targets: '.sidebar',
                             width: 0,
+                            translateX: '-200px',
                             duration: 500,
                             easing: 'easeOutExpo',
                             complete:()=>{
@@ -379,11 +382,31 @@ p{
     height: 15vh;
     width: 15vh;
     border-radius: 50%;
-    box-shadow: 0 0 1rem var(--color);
+    /*box-shadow: 0 0 1rem var(--color);*/
     transition: 0.35s opacity;
-    background-image: url("../assets/img/profile.jpg");
+    background-image: url("../assets/img/profile.png");
     background-size: 100%;
-    box-shadow: 0 0 1vh 0.3vh var(--bgcolor2) inset;
+    /*box-shadow: 0 0 1vh 0vh var(--bgcolor2), 0 0 1vh 0.5vh var(--color2) inset;*/
+}
+.profile-pic::before{
+    content: "";
+    position: absolute;
+    height: 15vh;
+    width: 15vh;
+    border-radius: 50%;
+    opacity: 0.9;
+    background: conic-gradient(#2efdff 0%, #e507e2 10%, #e507e2 50%,#2efdff 60%, #2efdff 100%);
+    mask-image: radial-gradient(circle farthest-side at center, transparent 85%, white 99%);
+}
+.profile-glow{
+    position: absolute;
+    border-radius: 50%;
+    height: 15vh;
+    width: 15vh;
+    z-index: -10;
+    background: conic-gradient(#2efdff 0%, #e507e2 15%, #e507e2 50%,#2efdff 60%, #2efdff 100%);
+    filter: blur(20px);
+    opacity: 1;
 }
 .profile-div:hover .profile-pic{
     opacity: 0.3;

@@ -1,10 +1,11 @@
 <template>
-  <div class="progress-circle" :key="counter" :class="active ? 'active' : ''" @mouseenter="$emit('hover',true)" @mouseleave="$emit('hover',false)"> 
+  <div class="progress-circle mx-9" :key="counter" :class="active ? 'active' : ''" @mouseenter="$emit('hover',true)" @mouseleave="$emit('hover',false)"> 
     <div :color="color" class="circle-gradient w-full h-full flex justify-center items-center">
       <div class="loader" :style="loaderStyle"></div>
-      <svg class="anim" ref="svgCircle">
+      <div class="glow" :style="glowStyle"></div>
+      <svg viewBox="0 0 100 100" class="anim" ref="svgCircle">
         <!--<circle r="45" cx="50" cy="50" class="pie" :style="animStyle"/>-->
-        <circle :r="r" :cx="c.x" :cy="c.y" class="pie" :style="animStyle" :key="r"/>
+
       </svg>
       <div class="flex flex-col justify-center items-center">
         <p :fSize="fSize" :style="textOpac" class="skill-name">{{ text }}</p>
@@ -31,7 +32,66 @@ export default {
   },
   computed:{
     loaderStyle(){
-      return  "background-image:conic-gradient(from 0deg, transparent "+this.percentage+"%,  var(--bgcolor1) 0% 90%)";
+      if(this.color === 0){
+        return `background-image:conic-gradient(
+          from 0deg, 
+          var(--neonPink1) 0%, 
+          transparent 1.5%,
+          transparent ${this.percentage-1}%,
+          var(--neonPink1) ${this.percentage-0.1}%,
+          transparent ${this.percentage}%,
+          var(--bgcolor1) 0% 90%);`;
+      }
+      else if(this.color === 1){
+        return `background-image:conic-gradient(
+          from 0deg, 
+          var(--aquaMarine1) 0%, 
+          transparent 1.5%,
+          transparent ${this.percentage-1}%,
+          var(--aquaMarine1) ${this.percentage-0.1}%,
+          transparent ${this.percentage}%,
+          var(--bgcolor1) 0% 90%)`;
+      }
+      else{
+        return `background-image:conic-gradient(
+          from 0deg, 
+          var(--amber1) 0%, 
+          transparent 1.5%,
+          transparent ${this.percentage-1}%,
+          var(--amber1) ${this.percentage-0.1}%,
+          transparent ${this.percentage}%,
+          var(--bgcolor1) 0% 90%)`;
+      }
+      //return "background-image:conic-gradient(from 0deg, transparent "+this.percentage+"%,  var(--bgcolor1) 0% 90%)";
+    },
+    glowStyle(){
+      if(this.color === 0){
+        return `background-image:conic-gradient(
+          from 0deg,
+          var(--bgcolor1) 0%,
+          var(--neonPink1) 10%, 
+          var(--neonPink1) ${this.percentage-10}%,
+          var(--bgcolor1) ${this.percentage}%,
+          var(--bgcolor1) 0% 90%)`;
+      }
+      else if(this.color === 1){
+        return `background-image:conic-gradient(
+          from 0deg, 
+          var(--bgcolor1) 0%,
+          var(--aquaMarine1) 10%,
+          var(--aquaMarine1) ${this.percentage-10}%,
+          var(--bgcolor1) ${this.percentage}%,
+          var(--bgcolor1) 0% 90%)`;
+      }
+      else{
+        return `background-image:conic-gradient(
+          from 0deg,
+          var(--bgcolor1) 0%,
+          var(--amber1) 10%,
+          var(--amber1) ${this.percentage-10}%,
+          var(--bgcolor1) ${this.percentage}%,
+          var(--bgcolor1) 0% 90%)`;
+      }
     }
   },
   methods:{
@@ -66,24 +126,30 @@ export default {
 }
 .circle-gradient{
   border-radius: 50%;
-  border: 2px solid black;
+  /*border: 5px solid black;*/
   position: relative;
   transition: all 0.3s ease-in-out;
 }
 .circle-gradient[color='0']{
-  background-image: radial-gradient(transparent 55%,black 75%),
+  background-image: radial-gradient(transparent 35%,black 72%),
     conic-gradient( 
-			var(--neonPink1),  var(--neonPink2), var(--neonPink3), var(--neonPink2), var(--neonPink1));
+			var(--neonPink1),  var(--neonPink2), var(--neonPink3));
+  box-shadow: inset 0px 0px 5px var(--neonPink1),
+              inset 0px 0px 10px var(--neonPink2);
 }
 .circle-gradient[color='1']{
-  background-image: radial-gradient(transparent 55%,black 75%),
+  background-image: radial-gradient(transparent 35%,black 72%),
     conic-gradient( 
-			var(--aquaMarine1),  var(--aquaMarine2), var(--aquaMarine3), var(--aquaMarine2), var(--aquaMarine1));
+			var(--aquaMarine1),  var(--aquaMarine2), var(--aquaMarine3));
+  box-shadow: inset 0px 0px 10px var(--aquaMarine1);
 }
 .circle-gradient[color='2']{
-  background-image: radial-gradient(transparent 55%,black 75%),
+  background-image: radial-gradient(transparent 35%,black 72%),
     conic-gradient( 
-			var(--amber1),  var(--amber2), var(--amber3), var(--amber2), var(--amber1));
+			var(--amber1),  var(--amber2), var(--amber3));
+  box-shadow: inset 0px 0px 5px var(--amber1),
+              inset 0px 0px 10px var(--amber2);
+  /*filter: drop-shadow( 0px 0px 5px var(--amber1));*/
 }
 .anim{
   height: 105%;
@@ -93,6 +159,7 @@ export default {
   border-radius: 50%;
   background-color: transparent;
   position: absolute;
+  left: 15vh;
 }
 .anim circle {
   width: 100%;
@@ -107,6 +174,16 @@ export default {
   scale: 1.1;
 }
 
+.circle-gradient::after{
+  content: "";
+  position: absolute;
+  width: calc(9.5vh - 8px);
+  height: calc(9.5vh - 8px);
+  z-index: 10;
+  background-color: var(--bgcolor1);
+  border-radius: 50%;
+}
+
 .circle-gradient::before{
   content: "";
   position: absolute;
@@ -117,21 +194,38 @@ export default {
 }
 
 .circle-gradient[color='0']::before{
-  border: 3px solid var(--neonPink1);
+  border: 4px solid var(--neonPink1);
 }
 .circle-gradient[color='1']::before{
-  border: 3px solid #0FD686;
+  border: 4px solid #0FD686;
 }
 .circle-gradient[color='2']::before{
-  border: 3px solid #FF8300;
+  border: 4px solid #ff8300;
+}
+
+.circle-gradient[color='0'] p{
+  color: var(--neonPink1);
+  text-shadow: 
+    0 0 10px var(--neonPink1),
+    0 0 20px var(--neonPink1);
+}
+
+.circle-gradient[color='1'] p{
+  color: var(--aquaMarine1);
+  text-shadow: 
+    0 0 10px var(--aquaMarine1),
+    0 0 20px var(--aquaMarine1);
+}
+
+.circle-gradient[color='2'] p{
+  color: var(--amber1);
+  text-shadow: 
+    0 0 10px var(--amber1),
+    0 0 20px var(--amber1);
 }
 
 .circle-gradient p{
-  color: var(--color1);
-  text-shadow: 
-    0 0 10px var(--color1),
-    0 0 20px var(--color1);
-  z-index: 10;
+  z-index: 50;
   font-family: "Roboto-bold";
   opacity: 0;
   transition: opacity 1s, transform 0.75s ease;
@@ -140,6 +234,9 @@ export default {
 .skill-name{
   font-size: 2.5vh;
   transform: translate(0,1vh);
+  max-width: 7.3vh;
+  word-wrap: break-word;
+  text-align: center;
   /*translate: 0 1vh;*/
 }
 
@@ -159,10 +256,10 @@ export default {
   font-size: 1.75vh;
 }
 .skill-name[fSize='1']{
-  font-size: 2.5vh;
+  font-size: 2vh;
 }
 .skill-name[fSize='2']{
-  font-size: 3vh;
+  font-size: 2.5vh;
 }
 
 /*.progress-circle:hover .skill-percent{
@@ -179,7 +276,34 @@ export default {
   bottom: -1px;
   left: -1px;
   right: -1px;
+  /*clip-path: circle(49.9% at center);*/
   /*background-image: conic-gradient(from 0deg, transparent 90%,  var(--bgcolor1) 0% 90%);*/
+}
+
+/*.loader::after{
+  content: "";
+  position: absolute;
+  border: solid 0px black;
+  z-index: 100;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(3px);
+
+}*/
+.glow{
+  position: absolute;
+  border-radius: 50%;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: -10;
+  filter: blur(25px);
+  opacity: 70%;
 }
 </style>
 
