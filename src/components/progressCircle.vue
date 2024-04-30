@@ -2,7 +2,7 @@
   <div class="progress-circle mx-9" :key="counter" :class="active ? 'active' : ''" @mouseenter="$emit('hover',true)" @mouseleave="$emit('hover',false)"> 
     <div :color="color" class="circle-gradient w-full h-full flex justify-center items-center">
       <div class="loader" :style="loaderStyle"></div>
-      <div class="glow opacity-0" :style="[glowStyle,textOpac]"></div>
+      <div class="glow opacity-0" :style="[glowStyle,glowOpac]"></div>
       <svg viewBox="0 0 100 100" class="anim" ref="svgCircle">
         <circle r="45" cx="50" cy="50" class="pie" :style="animStyle"/>
 
@@ -27,7 +27,8 @@ export default {
       counter:0,
       r:50,
       c:{x:50,y:50},
-      textOpac:''
+      textOpac:'',
+      glowOpac:''
     }
   },
   computed:{
@@ -106,6 +107,7 @@ export default {
     setTimeout(() => {
       this.animStyle = "stroke-dashoffset:500";
       this.textOpac = "opacity:1";
+      this.glowOpac = "opacity:1";
     }, this.delay);
     window.addEventListener('resize',()=>{ 
       this.counter++
@@ -302,9 +304,9 @@ export default {
   left: 0px;
   right: 0px;
   z-index: -10;
-  filter: blur(25px);
-  transition: opacity 2s;
-  transition-delay: 0.5s;
+  filter: blur(2vh);
+  transition: opacity 1.5s;
+  transition-delay: 0.6s;
 }
 </style>
 
